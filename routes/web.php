@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::get("/dashboard", "App\Http\Controllers\DashboardController@index")->name("dashboard");
     Route::get("/overview", "App\Http\Controllers\OverviewController@index")->name("overview");
+    Route::get("/map", "App\Http\Controllers\MapController@index")->name("map");
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

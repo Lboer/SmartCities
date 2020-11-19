@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Overview Bins
+                Map
             </h2>
         </template>
 
@@ -15,43 +15,39 @@
                                 <thead>
                                     <tr>
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Token
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                             Name
                                         </th>
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Temperature
+                                            Last Active At
                                         </th>
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Distance
+                                            X
                                         </th>
                                         <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Updated at
+                                            Y
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="bin in bins" :key="bin.id">
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            {{ bin.token }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            {{ bin.name }}
-                                        </td>
+                                    <tr v-for="bin in locations" :key="bin.id">
                                         <td class="px-6 py-4 whitespace-no-wrap">
                                             <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.temperature }} °C
+                                                {{ showName(bin.garbage_bin_id) }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap">
                                             <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.distance }} cm
+                                                {{ showActivity(bin.garbage_bin_id) }}
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-no-wrap">
                                             <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.last_active_at }}
+                                                {{ bin.x }}
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap">
+                                            <div class="text-sm leading-5 text-gray-900">
+                                                {{ bin.y }}
                                             </div>
                                         </td>
                                     </tr>
@@ -75,7 +71,24 @@ export default {
         Container
     },
     props: {
+        locations: Array,
         bins: Array
+    },
+    methods: {
+        showName(arg){
+            var result = this.bins.filter(obj => {
+                return obj.id === arg
+            })
+            
+            return result[0].name;
+        },
+        showActivity(arg){
+            var result = this.bins.filter(obj => {
+                return obj.id === arg
+            })
+            
+            return result[0].last_active_at;
+        }
     }
 }
 </script>
