@@ -7,7 +7,18 @@
         </template>
 
         <container>
-            <div class="flex flex-col">
+            <l-map
+                v-if="showMap"
+                :zoom="zoom"
+                :center="center"
+                :options="mapOptions"
+                style="height: 80%"
+                @update:center="centerUpdate"
+                @update:zoom="zoomUpdate"
+            >
+            </l-map>
+            <!-- <img class="w-full inline m-4" :src="'/img/map.png'"> -->
+            <!-- <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -56,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </container>
     </app-layout>
 </template>
@@ -64,15 +75,38 @@
 <script>
 import AppLayout from './../Layouts/AppLayout'
 import Container from './../Components/Container'
+import { latLng } from "leaflet";
+import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 
 export default {
     components: {
         AppLayout,
-        Container
+        Container,
+        LMap,
+        LTileLayer,
+        LMarker
     },
     props: {
         locations: Array,
         bins: Array
+    },
+    data() {
+        return {
+            zoom: 13,
+            center: latLng(47.41322, -1.219482),
+            url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+            attribution:
+                '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            withPopup: latLng(47.41322, -1.219482),
+            withTooltip: latLng(47.41422, -1.250482),
+            currentZoom: 11.5,
+            currentCenter: latLng(47.41322, -1.219482),
+            showParagraph: false,
+            mapOptions: {
+                zoomSnap: 0.5
+            },
+            showMap: true
+        };
     },
     methods: {
         showName(arg){
@@ -88,6 +122,18 @@ export default {
             })
             
             return result[0].last_active_at;
+        },
+        zoomUpdate(zoom) {
+            this.currentZoom = zoom;
+        },
+        centerUpdate(center) {
+            this.currentCenter = center;
+        },
+        showLongText() {
+            this.showParagraph = !this.showParagraph;
+        },
+        innerClick() {
+            alert("Click!");
         }
     }
 }
