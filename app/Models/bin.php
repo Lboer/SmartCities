@@ -19,4 +19,5 @@ class bin extends Model
         "temperature",
         "distance"
     ];
+
 }

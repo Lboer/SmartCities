@@ -12,11 +12,17 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
+
 
         <!-- Scripts -->
         @routes
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="//unpkg.com/vue2-leaflet"></script>
+
+
     </head>
     <body class="font-sans antialiased">
         @inertia

@@ -12,12 +12,10 @@ class MapController extends Controller
 {
     public function index()
     {
-        $locations = Map::all();
-        $bins = Bin::all();
+        $locations = Map::with('bin')->get();
 
         return Inertia::render("Map", [
             "locations"=> $locations,
-            "bins" => $bins
         ]);
     }
 }

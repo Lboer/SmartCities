@@ -18,4 +18,8 @@ class Map extends Model
         "x",
         "y"
     ];
+
+    public function bin() {
+        return $this->hasOne('App\Models\bin', 'id', 'garbage_bin_id');
+    }
 }
