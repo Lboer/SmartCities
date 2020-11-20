@@ -3482,43 +3482,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3529,7 +3492,8 @@ __webpack_require__.r(__webpack_exports__);
     Container: _Components_Container__WEBPACK_IMPORTED_MODULE_1__["default"],
     LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMap"],
     LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LTileLayer"],
-    LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMarker"]
+    LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMarker"],
+    LPopup: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPopup"]
   },
   props: {
     locations: Array
@@ -4450,7 +4414,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".map[data-v-6ffb2f43] {\n  height: 30vh;\n}\n", ""]);
+exports.push([module.i, ".map[data-v-6ffb2f43] {\n  height: 70vh;\n}\n", ""]);
 
 // exports
 
@@ -40903,10 +40867,35 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm._l(_vm.markers, function(marker, index) {
-                      return _c("l-marker", {
-                        key: index,
-                        attrs: { "lat-lng": marker }
-                      })
+                      return _c(
+                        "l-marker",
+                        { key: index, attrs: { "lat-lng": marker } },
+                        [
+                          _c("l-popup", { staticClass: "text-center" }, [
+                            _c("b", [
+                              _vm._v(_vm._s(_vm.locations[index].bin.name))
+                            ]),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(
+                                  _vm.locations[index].bin.last_active_at
+                                ) +
+                                " "
+                            ),
+                            _c("br"),
+                            _vm._v(
+                              "\n                        Temp: " +
+                                _vm._s(_vm.locations[index].bin.temperature) +
+                                "°C, Distance: " +
+                                _vm._s(_vm.locations[index].bin.distance) +
+                                " cm\n\n\n                    "
+                            )
+                          ])
+                        ],
+                        1
+                      )
                     })
                   ],
                   2
@@ -40921,190 +40910,10 @@ var render = function() {
             "div",
             { staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" },
             [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-                    },
-                    [
-                      _c(
-                        "table",
-                        { staticClass: "min-w-full divide-y divide-gray-200" },
-                        [
-                          _c("thead", [
-                            _c("tr", [
-                              _c(
-                                "th",
-                                {
-                                  staticClass:
-                                    "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Name\n                                "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "th",
-                                {
-                                  staticClass:
-                                    "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Last Active At\n                                "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "th",
-                                {
-                                  staticClass:
-                                    "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    X\n                                "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "th",
-                                {
-                                  staticClass:
-                                    "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Y\n                                "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "tbody",
-                            {
-                              staticClass: "bg-white divide-y divide-gray-200"
-                            },
-                            _vm._l(_vm.locations, function(location) {
-                              return _c("tr", { key: location.id }, [
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass: "px-6 py-4 whitespace-no-wrap"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-sm leading-5 text-gray-900"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(location.bin.name) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass: "px-6 py-4 whitespace-no-wrap"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-sm leading-5 text-gray-900"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(
-                                              location.bin.last_active_at
-                                            ) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass: "px-6 py-4 whitespace-no-wrap"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-sm leading-5 text-gray-900"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(location.x) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  {
-                                    staticClass: "px-6 py-4 whitespace-no-wrap"
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-sm leading-5 text-gray-900"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(location.y) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                            }),
-                            0
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              )
+              _c("div", {
+                staticClass:
+                  "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+              })
             ]
           )
         ])

@@ -14,6 +14,10 @@ class MapController extends Controller
     {
         $locations = Map::with('bin')->get();
 
+        foreach ($locations as $location){
+            $location->bin->last_active_at = date('d-m-Y, H:i', strtotime($location->bin->last_active_at));
+        }
+
         return Inertia::render("Map", [
             "locations"=> $locations,
         ]);

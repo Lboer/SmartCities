@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
 
-
         <!-- Scripts -->
         @routes
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
