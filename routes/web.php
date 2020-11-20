@@ -19,10 +19,11 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::get("/dashboard", "App\Http\Controllers\DashboardController@index")->name("dashboard");
+
     Route::get("/overview", "App\Http\Controllers\OverviewController@index")->name("overview");
+    Route::get('/overview/{bin}/edit', 'App\Http\Controllers\OverviewController@showUpdateForm')->name('overview.edit_form');
+    Route::patch('/overview/{bin}', 'App\Http\Controllers\OverviewController@update')->name('overview.edit');
+    Route::delete('/overview/{bin}', 'App\Http\Controllers\OverviewController@delete')->name('overview.delete');
+
     Route::get("/map", "App\Http\Controllers\MapController@index")->name("map");
 });
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return Inertia\Inertia::render('Dashboard');
-// })->name('dashboard');
