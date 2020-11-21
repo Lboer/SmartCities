@@ -28,7 +28,7 @@ class OverviewController extends Controller
 
     public function update(Bin $bin, Request $request)
     {
-        $this->validateWithBag('registerAppointment', $request, [
+        $this->validateWithBag('editGarbageBin', $request, [
             'name' => ['required', 'string'],
         ]);
 
