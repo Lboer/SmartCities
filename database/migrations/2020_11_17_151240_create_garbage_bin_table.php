@@ -16,9 +16,11 @@ class CreateGarbageBinTable extends Migration
         Schema::create('garbage_bin', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('token')->unique()->index();
-            $table->string('name');
-            $table->float('distance');
-            $table->float('temperature');
+            $table->float('lat');
+            $table->float('lon');
+            $table->integer('percentage_full');
+            $table->boolean('on_fire');
+            $table->timestamp("last_active_at")->nullable();
             $table->timestamps();
         });
     }
