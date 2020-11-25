@@ -14,14 +14,14 @@
             <jet-form-section @submitted="submit" :vertical="true">
                 <template #form>
                     <div class="flex">
-                        <div class="w-12/12">
+                        <div class="w-full">
                             <jet-label for="name"
                                     value="Name"
                                     class="w-full"
                             />
                     
                             <jet-input id="name" type="text"
-                                    class="w-full"
+                                    class="w-max"
                                     v-model="editGarbageBinForm.name"
                                     autofocus
                             />
@@ -60,7 +60,7 @@ import AppLayout from "../../Layouts/AppLayout";
 
 export default {
     props: {
-        bin: Object
+        garbageBin: Object
     },
     components: {
         AppLayout,
@@ -75,7 +75,7 @@ export default {
     data() {
         return {
             editGarbageBinForm: this.$inertia.form({
-                name: this.bin.name,
+                name: this.garbageBin.name,
             }, {
                 bag: 'editGarbageBin',
                 resetOnSuccess: true,
@@ -85,7 +85,7 @@ export default {
     methods: {
         submit() {
             this.editGarbageBinForm.patch(
-                route('overview.edit', {bin: this.bin.id})
+                route('overview.edit', {bin: this.garbageBin.id})
             );
         }
     }
