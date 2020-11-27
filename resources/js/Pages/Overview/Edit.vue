@@ -77,39 +77,36 @@
     import JetLabel from "../../Jetstream/Label";
     import AppLayout from "../../Layouts/AppLayout";
 
-    export default {
-        props: {
-            bin: Object,
-            location: Object
-        },
-        components: {
-            AppLayout,
-            JetActionMessage,
-            JetButton,
-            JetDangerButton,
-            JetFormSection,
-            JetInput,
-            JetInputError,
-            JetLabel
-        },
-        data() {
-            return {
-                editGarbageBinForm: this.$inertia.form({
-                    name: this.bin.name,
-                    address: this.location.address,
-                    city: this.location.city
-                }, {
-                    bag: 'editGarbageBin',
-                    resetOnSuccess: true,
-                })
-            }
-        },
-        methods: {
-            submit() {
-                this.editGarbageBinForm.patch(
-                    route('overview.edit', {bin: this.bin.id})
-                );
-            }
+export default {
+    props: {
+        garbageBin: Object
+    },
+    components: {
+        AppLayout,
+        JetActionMessage,
+        JetButton,
+        JetDangerButton,
+        JetFormSection,
+        JetInput,
+        JetInputError,
+        JetLabel
+    },
+    data() {
+        return {
+            editGarbageBinForm: this.$inertia.form({
+                name: this.garbageBin.name,
+            }, {
+                bag: 'editGarbageBin',
+                resetOnSuccess: true,
+            })
+        }
+    },
+    methods: {
+        submit() {
+            this.editGarbageBinForm.patch(
+                route('overview.edit', {bin: this.garbageBin.id})
+            );
         }
     }
+}
 </script>

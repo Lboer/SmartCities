@@ -3650,8 +3650,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -3912,8 +3910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    bin: Object,
-    location: Object
+    garbageBin: Object
   },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"],
@@ -3928,9 +3925,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editGarbageBinForm: this.$inertia.form({
-        name: this.bin.name,
-        address: this.location.address,
-        city: this.location.city
+        name: this.garbageBin.name
       }, {
         bag: 'editGarbageBin',
         resetOnSuccess: true
@@ -3940,7 +3935,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submit: function submit() {
       this.editGarbageBinForm.patch(route('overview.edit', {
-        bin: this.bin.id
+        bin: this.garbageBin.id
       }));
     }
   }
@@ -41360,7 +41355,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Name\n                                "
+                                      "\n                                        Name\n                                    "
                                     )
                                   ]
                                 ),
@@ -41373,7 +41368,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Temperature\n                                "
+                                      "\n                                        Temperature\n                                    "
                                     )
                                   ]
                                 ),
@@ -41386,7 +41381,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Distance\n                                "
+                                      "\n                                        Percent Full\n                                    "
                                     )
                                   ]
                                 ),
@@ -41399,7 +41394,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Updated at\n                                "
+                                      "\n                                        Updated at\n                                    "
                                     )
                                   ]
                                 ),
@@ -41425,9 +41420,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                    " +
+                                        "\n                                        " +
                                           _vm._s(bin.name) +
-                                          "\n                                "
+                                          "\n                                    "
                                       )
                                     ]
                                   ),
@@ -41447,9 +41442,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        " +
-                                              _vm._s(bin.temperature) +
-                                              " °C\n                                    "
+                                            "\n                                            " +
+                                              _vm._s(bin.on_fire) +
+                                              " °C\n                                        "
                                           )
                                         ]
                                       )
@@ -41471,9 +41466,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        " +
-                                              _vm._s(bin.distance) +
-                                              " cm\n                                    "
+                                            "\n                                            " +
+                                              _vm._s(bin.percentage_full) +
+                                              " %\n                                        "
                                           )
                                         ]
                                       )
@@ -41495,9 +41490,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        " +
+                                            "\n                                            " +
                                               _vm._s(bin.last_active_at) +
-                                              "\n                                    "
+                                              "\n                                        "
                                           )
                                         ]
                                       )
@@ -41525,7 +41520,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                        Edit\n                                    "
+                                            "\n                                            Bewerken\n                                        "
                                           )
                                         ]
                                       ),

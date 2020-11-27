@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
-    Route::get("/dashboard", "App\Http\Controllers\DashboardController@index")->name("dashboard");
+    Route::get("/dashboard", "DashboardController@index")->name("dashboard");
 
     Route::get("/overview", "App\Http\Controllers\OverviewController@index")->name("overview");
     Route::get('/overview/add', 'App\Http\Controllers\OverviewController@showAddForm')->name('overview.add_form');
@@ -27,5 +27,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::patch('/overview/{bin}', 'App\Http\Controllers\OverviewController@update')->name('overview.edit');
     Route::delete('/overview/{bin}', 'App\Http\Controllers\OverviewController@delete')->name('overview.delete');
 
-    Route::get("/map", "App\Http\Controllers\MapController@index")->name("map");
+    Route::get("/map", "MapController@index")->name("map");
 });

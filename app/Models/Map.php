@@ -20,6 +20,6 @@ class Map extends Model
     ];
 
     public function bin() {
-        return $this->hasOne('App\Models\bin', 'id', 'garbage_bin_id');
+        return $this->hasOne('App\Models\GarbageBin', 'id', 'garbage_bin_id');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use Illuminate\Support\Facades\DB;
-use App\Models\Bin;
+use App\Models\GarbageBin;
 use App\Models\Map;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -32,7 +32,7 @@ class OverviewController extends Controller
 
     public function index()
     {
-        $bins = Bin::all();
+        $bins = GarbageBin::all();
 
         foreach ($bins as $bin){
             $bin->last_active_at = date('d-m-Y, H:i', strtotime($bin->last_active_at));
@@ -43,6 +43,7 @@ class OverviewController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
     public function showAddForm()
     {
         return Inertia::render("Overview/Add");
@@ -87,12 +88,21 @@ class OverviewController extends Controller
         return Inertia::render("Overview/Edit", [
             "bin" => $bin,
             "location" => Map::where("garbage_bin_id", $bin->id)->first()
+=======
+    public function showUpdateForm(GarbageBin $bin)
+    {
+        return Inertia::render("Overview/Edit", [
+            "garbageBin" => $bin
+>>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
         ]);
     }
 
-    public function update(Bin $bin, Request $request)
+    public function update(Request $request, GarbageBin $bin)
     {
+<<<<<<< HEAD
         // Validate request
+=======
+>>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
         $this->validateWithBag('editGarbageBin', $request, [
             'name' => ['required', 'string'],
             'city' => ['required', 'string'],
@@ -102,6 +112,7 @@ class OverviewController extends Controller
         // Update bin data
         $bin->update($request->only("name"));
 
+<<<<<<< HEAD
         // Retrieve latitude and longitude
         $this->getLonLat($request);
 
@@ -114,16 +125,26 @@ class OverviewController extends Controller
                 'y' => $this->lat
             ]);
         }
+=======
+        $bins = GarbageBin::all();
+>>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
 
         return redirect(route('overview'));
     }
 
-    public function delete(Bin $bin)
+    public function delete(GarbageBin $bin)
     {
+<<<<<<< HEAD
         $map = Map::where("garbage_bin_id", $bin->id)->first();
         $map->delete();
         $bin->delete();
 
+=======
+        $bin->delete();
+
+        $bins = GarbageBin::all();
+
+>>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
         return redirect(route('overview'));
     }
 }

@@ -6,7 +6,7 @@ use App\Models\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class bin extends Model
+class GarbageBin extends Model
 {
     use HasFactory;
     use UsesUuid;
@@ -14,10 +14,16 @@ class bin extends Model
     protected $table = "garbage_bin";
 
     protected $fillable = [
-        "name",
         "token",
-        "temperature",
-        "distance"
+        "lat",
+        "lon",
+        'percentage_full',
+        "on_fire",
+        "last_active_at",
+        "name"
     ];
 
+    protected $casts = [
+        'last_active_at' => 'datetime'
+    ];
 }
