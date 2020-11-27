@@ -41192,7 +41192,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Distance\n                                    "
+                                      "\n                                        Percent Full\n                                    "
                                     )
                                   ]
                                 ),
@@ -41254,7 +41254,7 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                            " +
-                                              _vm._s(bin.temperature) +
+                                              _vm._s(bin.on_fire) +
                                               " °C\n                                        "
                                           )
                                         ]
@@ -41278,8 +41278,8 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                            " +
-                                              _vm._s(bin.distance) +
-                                              " cm\n                                        "
+                                              _vm._s(bin.percentage_full) +
+                                              " %\n                                        "
                                           )
                                         ]
                                       )

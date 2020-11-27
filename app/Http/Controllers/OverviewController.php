@@ -26,7 +26,7 @@ class OverviewController extends Controller
         ]);
     }
 
-    public function update(GarbageBin $bin, Request $request)
+    public function update(Request $request, GarbageBin $bin)
     {
         $this->validateWithBag('editGarbageBin', $request, [
             'name' => ['required', 'string'],
@@ -41,8 +41,6 @@ class OverviewController extends Controller
 
     public function delete(GarbageBin $bin)
     {
-        $map = Map::where("garbage_bin_id", $bin->id);
-        $map->delete();
         $bin->delete();
 
         $bins = GarbageBin::all();

@@ -22,6 +22,7 @@ class CreateGarbageBinTable extends Migration
             $table->boolean('on_fire');
             $table->timestamp("last_active_at")->nullable();
             $table->timestamps();
+            $table->string('name');
         });
     }
 
