@@ -13,13 +13,13 @@ class CreateGarbageBinTable extends Migration
      */
     public function up()
     {
-        Schema::create('garbage_bin', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('garbage_bins', function (Blueprint $table) {
+            $table->id();
             $table->string('token')->unique()->index();
-            $table->float('lat');
-            $table->float('lon');
-            $table->integer('percentage_full');
-            $table->boolean('on_fire');
+            $table->float('lon', 15, 10)->nullable()->default(null);
+            $table->float('lat', 15, 10)->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
             $table->timestamp("last_active_at")->nullable();
             $table->timestamps();
             $table->string('name');

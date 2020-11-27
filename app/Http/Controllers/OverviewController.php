@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Value;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use Illuminate\Support\Facades\DB;
@@ -30,20 +31,6 @@ class OverviewController extends Controller
         }
     }
 
-    public function index()
-    {
-        $bins = GarbageBin::all();
-
-        foreach ($bins as $bin){
-            $bin->last_active_at = date('d-m-Y, H:i', strtotime($bin->last_active_at));
-        }
-
-        return Inertia::render("Overview", [
-            "bins"=> $bins
-        ]);
-    }
-
-<<<<<<< HEAD
     public function showAddForm()
     {
         return Inertia::render("Overview/Add");
@@ -51,100 +38,96 @@ class OverviewController extends Controller
 
     public function add(Request $request)
     {
-        // Validate request
-        $this->validateWithBag('addGarbageBin', $request, [
-            'name' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'address' => ['required', 'string']
+        //Validate request
+        $request->validateWithBag('addGarbageBin', [
+            'name' => ['required', 'string', 'max:100', 'min:1'],
+            'address' => ['required', 'string', 'max:100', 'min:1'],
+            'city' => ['required', 'string', 'max:100', 'min:1'],
         ]);
 
+        //Make API call for location
+        $location = $request['address'] . ' ' . $request['city'] . ' ';
+        $client = new GuzzleHttp\Client();
+        $api = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey=36540946f91a4e36996fd4e370d9225b');
 
-        // Create bin
-        $bin = Bin::create([
-            'name' => $request['name'],
-            'token' => Str::random(10),
-            'distance' => rand(0, 10000)/100,
-            'temperature' => (rand(0, 4000) - 1000)/100,
-            'last_active_at' => time()
-        ]);
+        //If API returns valuable location data create bin with location data otherwise create bin without location data
+        if ($api->getStatusCode() == 200 && count(json_decode($api->getBody())->features) !== 0) {
+            $createdBin = GarbageBin::create([
+                'token' => Str::random(10),
+                'lon' => json_decode($api->getBody())->features[0]->properties->lon,
+                'lat' => json_decode($api->getBody())->features[0]->properties->lat,
+                'address' => $request['address'],
+                'city' => $request['city'],
+                'name' => $request['name']
+            ]);
+        } else {
+            $createdBin = GarbageBin::create([
+                'token' => Str::random(10),
+                'name' => $request['name']
+                ]);
+        }
 
-        // Retrieve latitude and longitude
-        $this->getLonLat($request);
-
-        // Create location data
-        Map::create([
-            'garbage_bin_id' => $bin->id,
-            'address' => $request['address'],
-            'city' => $request['city'],
-            'x' => $this->lon,
-            'y' => $this->lat
+        //Create first value entry
+        Value::create([
+           'garbage_bin_id' => $createdBin->id,
+           'on_fire' => 0,
+           'percentage_full' => 0
         ]);
 
         return redirect(route('overview'));
     }
 
-    public function showUpdateForm(Bin $bin)
+    public function index()
     {
-        return Inertia::render("Overview/Edit", [
-            "bin" => $bin,
-            "location" => Map::where("garbage_bin_id", $bin->id)->first()
-=======
+        $bins = GarbageBin::with('latestValue')->get();
+
+        foreach ($bins as $bin) {
+            $bin->last_active_at = date('d-m-Y, H:i', strtotime($bin->last_active_at));
+        }
+
+        return Inertia::render("Overview", [
+            "bins" => $bins
+        ]);
+    }
+
     public function showUpdateForm(GarbageBin $bin)
     {
         return Inertia::render("Overview/Edit", [
             "garbageBin" => $bin
->>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
         ]);
     }
 
     public function update(Request $request, GarbageBin $bin)
     {
-<<<<<<< HEAD
-        // Validate request
-=======
->>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
-        $this->validateWithBag('editGarbageBin', $request, [
-            'name' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'address' => ['required', 'string']
+        $request->validateWithBag('editGarbageBin', [
+            'name' => ['required', 'string', 'max:100', 'min:1'],
+            'address' => ['required', 'string', 'max:100', 'min:1'],
+            'city' => ['required', 'string', 'max:100', 'min:1'],
         ]);
 
-        // Update bin data
-        $bin->update($request->only("name"));
-
-<<<<<<< HEAD
-        // Retrieve latitude and longitude
-        $this->getLonLat($request);
-
-        // Update location data if location data is relevant
-        if ($this->lon !== null && $this->lat !== null) {
-            Map::where("garbage_bin_id", $bin->id)->update([
-                'address' => $request['address'],
-                'city' => $request['city'],
-                'x' => $this->lon,
-                'y' => $this->lat
-            ]);
+        $bin->name = $request['name'];
+        if ($bin->address !== $request['address'] || $bin->city !== $request['city']) {
+            $location = $request['address'] . ' ' . $request['city'] . ' ';
+            $client = new GuzzleHttp\Client();
+            $api = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey=36540946f91a4e36996fd4e370d9225b');
+            if ($api->getStatusCode() == 200 && count(json_decode($api->getBody())->features) !== 0) {
+                $bin->lon = json_decode($api->getBody())->features[0]->properties->lon;
+                $bin->lat = json_decode($api->getBody())->features[0]->properties->lat;
+                $bin->address = $request['address'];
+                $bin->city = $request['city'];
+            }
         }
-=======
-        $bins = GarbageBin::all();
->>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
+        $bin->save();
 
         return redirect(route('overview'));
     }
 
     public function delete(GarbageBin $bin)
     {
-<<<<<<< HEAD
-        $map = Map::where("garbage_bin_id", $bin->id)->first();
-        $map->delete();
-        $bin->delete();
-
-=======
         $bin->delete();
 
         $bins = GarbageBin::all();
 
->>>>>>> 9c0f76b4c106483c04d2e04cfd1d9e23394305e0
         return redirect(route('overview'));
     }
 }

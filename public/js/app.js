@@ -3032,6 +3032,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3501,7 +3513,7 @@ __webpack_require__.r(__webpack_exports__);
     LPopup: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPopup"]
   },
   props: {
-    locations: Array
+    bins: Array
   },
   data: function data() {
     return {
@@ -3519,8 +3531,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setMarkers: function setMarkers() {
       var markersArray = [];
-      this.locations.forEach(function (location) {
-        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(location.y, location.x));
+      this.bins.forEach(function (bin) {
+        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(bin.lat, bin.lon));
       });
       this.markers = markersArray;
       this.loading = 0;
@@ -3544,6 +3556,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3925,7 +3942,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editGarbageBinForm: this.$inertia.form({
-        name: this.garbageBin.name
+        name: this.garbageBin.name,
+        address: this.garbageBin.address,
+        city: this.garbageBin.city
       }, {
         bag: 'editGarbageBin',
         resetOnSuccess: true
@@ -39753,6 +39772,36 @@ var render = function() {
                         "\n                            Dashboard\n                        "
                       )
                     ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "jet-nav-link",
+                    {
+                      attrs: {
+                        href: _vm.route("overview"),
+                        active: _vm.route().current("overview")
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Overview\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "jet-nav-link",
+                    {
+                      attrs: {
+                        href: _vm.route("map"),
+                        active: _vm.route().current("map")
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Map\n                        "
+                      )
+                    ]
                   )
                 ],
                 1
@@ -40138,6 +40187,28 @@ var render = function() {
                     }
                   },
                   [_vm._v("\n                    Dashboard\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("overview"),
+                      active: _vm.route().current("overview")
+                    }
+                  },
+                  [_vm._v("\n                    Overview\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "jet-responsive-nav-link",
+                  {
+                    attrs: {
+                      href: _vm.route("map"),
+                      active: _vm.route().current("map")
+                    }
+                  },
+                  [_vm._v("\n                    Map\n                ")]
                 )
               ],
               1
@@ -41200,25 +41271,23 @@ var render = function() {
                             "l-popup",
                             { staticClass: "text-center" },
                             [
-                              _c("b", [
-                                _vm._v(_vm._s(_vm.locations[index].bin.name))
-                              ]),
+                              _c("b", [_vm._v(_vm._s(_vm.bins[index].name))]),
                               _vm._v(" "),
                               _c("br"),
                               _vm._v(
                                 "\n                        " +
-                                  _vm._s(
-                                    _vm.locations[index].bin.last_active_at
-                                  ) +
+                                  _vm._s(_vm.bins[index].last_active_at) +
                                   " "
                               ),
                               _c("br"),
                               _vm._v(
-                                "\n                        Temp: " +
-                                  _vm._s(_vm.locations[index].bin.temperature) +
-                                  "°C, Distance: " +
-                                  _vm._s(_vm.locations[index].bin.distance) +
-                                  "\n                        cm "
+                                "\n                        On fire: " +
+                                  _vm._s(_vm.bins[index].latest_value.on_fire) +
+                                  " , Full: " +
+                                  _vm._s(
+                                    _vm.bins[index].latest_value.percentage_full
+                                  ) +
+                                  "%\n                        cm "
                               ),
                               _c("br"),
                               _vm._v(" "),
@@ -41229,7 +41298,7 @@ var render = function() {
                                     "text-indigo-600 hover:text-indigo-900",
                                   attrs: {
                                     href: _vm.route("overview.edit_form", {
-                                      bin: _vm.locations[index].bin.id
+                                      bin: _vm.bins[index].id
                                     })
                                   }
                                 },
@@ -41355,7 +41424,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Name\n                                    "
+                                      "\n                                    Name\n                                "
                                     )
                                   ]
                                 ),
@@ -41368,7 +41437,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Temperature\n                                    "
+                                      "\n                                    On fire\n                                "
                                     )
                                   ]
                                 ),
@@ -41381,7 +41450,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Percent Full\n                                    "
+                                      "\n                                    Percent Full\n                                "
                                     )
                                   ]
                                 ),
@@ -41394,7 +41463,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Updated at\n                                    "
+                                      "\n                                    Updated at\n                                "
                                     )
                                   ]
                                 ),
@@ -41420,10 +41489,45 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        " +
+                                        "\n                                    " +
                                           _vm._s(bin.name) +
-                                          "\n                                    "
+                                          "\n                                "
                                       )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    {
+                                      staticClass:
+                                        "px-6 py-4 whitespace-no-wrap"
+                                    },
+                                    [
+                                      bin.latest_value.on_fire === 0
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "text-sm leading-5 text-green-500"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                        No\n                                    "
+                                              )
+                                            ]
+                                          )
+                                        : _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "text-sm leading-5 text-red-500"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                        Yes\n                                    "
+                                              )
+                                            ]
+                                          )
                                     ]
                                   ),
                                   _vm._v(" "),
@@ -41442,9 +41546,11 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(bin.on_fire) +
-                                              " °C\n                                        "
+                                            "\n                                        " +
+                                              _vm._s(
+                                                bin.latest_value.percentage_full
+                                              ) +
+                                              " %\n                                    "
                                           )
                                         ]
                                       )
@@ -41466,33 +41572,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            " +
-                                              _vm._s(bin.percentage_full) +
-                                              " %\n                                        "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    {
-                                      staticClass:
-                                        "px-6 py-4 whitespace-no-wrap"
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "text-sm leading-5 text-gray-900"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                            " +
+                                            "\n                                        " +
                                               _vm._s(bin.last_active_at) +
-                                              "\n                                        "
+                                              "\n                                    "
                                           )
                                         ]
                                       )
@@ -41520,7 +41602,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            Bewerken\n                                        "
+                                            "\n                                        Bewerken\n                                    "
                                           )
                                         ]
                                       ),
@@ -41579,7 +41661,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                                  Add\n                                    "
+                                          "\n                                        Add\n                                    "
                                         )
                                       ]
                                     )

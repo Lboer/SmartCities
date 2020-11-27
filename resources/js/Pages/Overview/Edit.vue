@@ -95,6 +95,8 @@ export default {
         return {
             editGarbageBinForm: this.$inertia.form({
                 name: this.garbageBin.name,
+                address: this.garbageBin.address,
+                city: this.garbageBin.city
             }, {
                 bag: 'editGarbageBin',
                 resetOnSuccess: true,

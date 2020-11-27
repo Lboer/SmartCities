@@ -9,16 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 class GarbageBin extends Model
 {
     use HasFactory;
-    use UsesUuid;
 
-    protected $table = "garbage_bin";
+    protected $table = "garbage_bins";
 
     protected $fillable = [
         "token",
         "lat",
         "lon",
-        'percentage_full',
-        "on_fire",
         "last_active_at",
         "name"
     ];
@@ -26,4 +23,14 @@ class GarbageBin extends Model
     protected $casts = [
         'last_active_at' => 'datetime'
     ];
+
+    public function values() {
+        return $this->hasMany('App\Models\Value');
+    }
+
+    public function latestValue()
+    {
+        return $this->hasOne(Value::class)->latest();
+    }
+
 }

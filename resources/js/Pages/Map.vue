@@ -13,11 +13,11 @@
                     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                     <l-marker v-for="(marker, index) in markers" :key="index" :lat-lng="marker">
                         <l-popup class="text-center">
-                            <b>{{ locations[index].bin.name }}</b> <br>
-                            {{ locations[index].bin.last_active_at }} <br>
-                            Temp: {{ locations[index].bin.temperature}}°C, Distance: {{ locations[index].bin.distance }}
+                            <b>{{ bins[index].name }}</b> <br>
+                            {{ bins[index].last_active_at }} <br>
+                            On fire: {{ bins[index].latest_value.on_fire }} , Full: {{ bins[index].latest_value.percentage_full }}%
                             cm <br>
-                            <inertia-link :href="route('overview.edit_form', {bin: locations[index].bin.id})"
+                            <inertia-link :href="route('overview.edit_form', {bin: bins[index].id})"
                                           class="text-indigo-600 hover:text-indigo-900">
                                 Edit
                             </inertia-link>
@@ -54,7 +54,7 @@
             LPopup
         },
         props: {
-            locations: Array,
+            bins: Array,
         },
         data() {
             return {
@@ -72,8 +72,8 @@
         methods: {
             setMarkers: function () {
                 let markersArray = [];
-                this.locations.forEach(function (location) {
-                    markersArray.push(latLng(location.y, location.x));
+                this.bins.forEach(function (bin) {
+                    markersArray.push(latLng(bin.lat, bin.lon));
                 });
                 this.markers = markersArray;
                 this.loading = 0;

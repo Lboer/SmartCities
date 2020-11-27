@@ -15,34 +15,43 @@ class GarbageBinSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('garbage_bin')->insert([[
-            "id" => 1,
-            "token" => Str::random(10),
-            "name" => "Garbage Bin 1",
-            "lat" => 52.3507849,
-            "lon" => 5.2647016,
-            "percentage_full" => 37,
-            "on_fire" => 20,
-            "last_active_at" => date("2020-11-19 10:28:00")
-        ],[
-            "id" => 2,
-            "token" => Str::random(10),
-            "name" => "Garbage Bin 2",
-            "lat" => 52.3508492,
-            "lon" => 5.6647016,
-            "percentage_full" => 92,
-            "on_fire" => 30,
-            "last_active_at" => date("2020-11-19 10:50:00")
-        ],[
-            "id" => 3,
-            "token" => Str::random(10),
-            "name" => "Garbage Bin 3",
-            "lat" => 52.3507149,
-            "lon" => 5.2647516,
-            "percentage_full" => 100,
-            "on_fire" => 84,
-            "last_active_at" => date("2020-11-19 15:19:00")
-        ]]
-    );
+        DB::table('garbage_bins')->insert([[
+                "id" => 1,
+                "token" => Str::random(10),
+                "name" => "Garbage Bin 1",
+                "address" => "Dageraadstraat 45",
+                "city" => "Almere",
+                "lat" => 52.408000,
+                "lon" => 5.299960,
+                "last_active_at" => date("2020-11-19 10:28:00")
+            ], [
+                "id" => 2,
+                "token" => Str::random(10),
+                "name" => "Garbage Bin 2",
+                "address" => "Kiel 7",
+                "city" => "Almere",
+                "lat" => 52.388580,
+                "lon" => 5.181260,
+                "last_active_at" => date("2020-11-19 10:50:00")
+            ], [
+                "id" => 3,
+                "token" => Str::random(10),
+                "name" => "Garbage Bin 3",
+                "address" => "Boylestraat 9",
+                "city" => "Amsterdam",
+                "lat" => 52.351730,
+                "lon" => 4.940630,
+                "last_active_at" => date("2020-11-19 15:19:00")
+            ], [
+                "id" => 4,
+                "token" => Str::random(10),
+                "name" => "Huis Snapking",
+                "address" => "Laurence Olivierstraat 18",
+                "city" => "Almere",
+                "lat" => 52.370930,
+                "lon" => 5.234530,
+                "last_active_at" => date("2020-11-19 15:19:00")
+            ]]
+        );
     }
 }

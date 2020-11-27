@@ -6,17 +6,16 @@ use App\Models\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Map extends Model
+class Value extends Model
 {
     use HasFactory;
-    use UsesUuid;
 
-    protected $table = "location";
+    protected $table = "values";
 
     protected $fillable = [
         "garbage_bin_id",
-        "x",
-        "y"
+        'percentage_full',
+        "on_fire"
     ];
 
     public function bin() {

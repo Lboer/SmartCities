@@ -14,46 +14,50 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Temperature
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Percent Full
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Updated at
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50"></th>
-                                    </tr>
+                                <tr>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Name
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        On fire
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Percent Full
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Updated at
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50"></th>
+                                </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="bin in bins" :key="bin.id">
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            {{ bin.name }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.on_fire }} °C
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.percentage_full }} %
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.last_active_at }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                            <inertia-link :href="route('overview.edit_form', {bin: bin.id})" class="text-indigo-600 hover:text-indigo-900">
-                                                Bewerken
-                                            </inertia-link>
+                                <tr v-for="bin in bins" :key="bin.id">
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ bin.name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div v-if="bin.latest_value.on_fire === 0" class="text-sm leading-5 text-green-500">
+                                            No
+                                        </div>
+                                        <div v-else class="text-sm leading-5 text-red-500">
+                                            Yes
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ bin.latest_value.percentage_full }} %
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ bin.last_active_at }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <inertia-link :href="route('overview.edit_form', {bin: bin.id})"
+                                                      class="text-indigo-600 hover:text-indigo-900">
+                                            Bewerken
+                                        </inertia-link>
                                         <span @click="garbageBinBeingDeleted = bin.id"
                                               class="text-red-600 hover:text-red-900 ml-3 cursor-pointer">
                                                 Delete
@@ -68,8 +72,9 @@
                                     <td/>
                                     <td/>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        <inertia-link :href="route('overview.add_form')" class="text-green-600 hover:text-green-900">
-                                                      Add
+                                        <inertia-link :href="route('overview.add_form')"
+                                                      class="text-green-600 hover:text-green-900">
+                                            Add
                                         </inertia-link>
                                     </td>
                                 </tr>

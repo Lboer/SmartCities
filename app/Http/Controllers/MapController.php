@@ -12,14 +12,14 @@ class MapController extends Controller
 {
     public function index()
     {
-        $locations = Map::with('garbageBin')->get();
+        $bins = GarbageBin::with('latestValue')->get();
 
-        foreach ($locations as $location){
-            $location->bin->last_active_at = date('d-m-Y, H:i', strtotime($location->bin->last_active_at));
+        foreach ($bins as $bin){
+            $bin->last_active_at = date('d-m-Y, H:i', strtotime($bin->last_active_at));
         }
 
         return Inertia::render("Map", [
-            "locations"=> $locations,
+            "bins"=> $bins,
         ]);
     }
 }
