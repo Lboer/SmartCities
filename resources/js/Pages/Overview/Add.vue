@@ -6,7 +6,7 @@
                     Overview Bins
                 </inertia-link>
                 <span class="text-gray-500">/</span>
-                Edit
+                Add
             </h2>
         </template>
 
@@ -19,11 +19,11 @@
                         />
 
                         <jet-input id="name" type="text"
-                                   v-model="editGarbageBinForm.name"
+                                   v-model="addGarbageBinForm.name"
                                    autofocus
                         />
 
-                        <jet-input-error :message="editGarbageBinForm.error('name')"
+                        <jet-input-error :message="addGarbageBinForm.error('name')"
                                          class="mx-8 mt-2"
                         />
                         <jet-label for="address"
@@ -31,10 +31,10 @@
                         />
 
                         <jet-input id="address" type="text"
-                                   v-model="editGarbageBinForm.address"
+                                   v-model="addGarbageBinForm.address"
                         />
 
-                        <jet-input-error :message="editGarbageBinForm.error('address')"
+                        <jet-input-error :message="addGarbageBinForm.error('address')"
                                          class="mx-8 mt-2"
                         />
 
@@ -43,22 +43,22 @@
                         />
 
                         <jet-input id="city" type="text"
-                                   v-model="editGarbageBinForm.city"
+                                   v-model="addGarbageBinForm.city"
                         />
 
-                        <jet-input-error :message="editGarbageBinForm.error('city')"
+                        <jet-input-error :message="addGarbageBinForm.error('city')"
                                          class="mx-8 mt-2"
                         />
                     </div>
                 </template>
 
                 <template #actions>
-                    <jet-action-message :on="editGarbageBinForm.recentlySuccessful" class="mr-3">
+                    <jet-action-message :on="addGarbageBinForm.recentlySuccessful" class="mr-3">
                         Created.
                     </jet-action-message>
 
-                    <jet-button :class="{ 'opacity-25': editGarbageBinForm.processing }"
-                                :disabled="editGarbageBinForm.processing">
+                    <jet-button :class="{ 'opacity-25': addGarbageBinForm.processing }"
+                                :disabled="addGarbageBinForm.processing">
                         Opslaan
                     </jet-button>
                 </template>
@@ -78,10 +78,6 @@
     import AppLayout from "../../Layouts/AppLayout";
 
     export default {
-        props: {
-            bin: Object,
-            location: Object
-        },
         components: {
             AppLayout,
             JetActionMessage,
@@ -94,20 +90,20 @@
         },
         data() {
             return {
-                editGarbageBinForm: this.$inertia.form({
-                    name: this.bin.name,
-                    address: this.location.address,
-                    city: this.location.city
+                addGarbageBinForm: this.$inertia.form({
+                    name: null,
+                    address: null,
+                    city: null
                 }, {
-                    bag: 'editGarbageBin',
+                    bag: 'addGarbageBin',
                     resetOnSuccess: true,
                 })
             }
         },
         methods: {
             submit() {
-                this.editGarbageBinForm.patch(
-                    route('overview.edit', {bin: this.bin.id})
+                this.addGarbageBinForm.post(
+                    route('overview.add')
                 );
             }
         }

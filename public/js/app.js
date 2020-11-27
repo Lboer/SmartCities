@@ -3482,6 +3482,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3515,7 +3520,7 @@ __webpack_require__.r(__webpack_exports__);
     setMarkers: function setMarkers() {
       var markersArray = [];
       this.locations.forEach(function (location) {
-        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(location.x, location.y));
+        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(location.y, location.x));
       });
       this.markers = markersArray;
       this.loading = 0;
@@ -3539,6 +3544,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_ConfirmationModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Jetstream/ConfirmationModal */ "./resources/js/Jetstream/ConfirmationModal.vue");
 /* harmony import */ var _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Jetstream/SecondaryButton */ "./resources/js/Jetstream/SecondaryButton.vue");
 /* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3668,6 +3690,132 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Jetstream/ActionMessage */ "./resources/js/Jetstream/ActionMessage.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Jetstream/DangerButton */ "./resources/js/Jetstream/DangerButton.vue");
+/* harmony import */ var _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Jetstream/FormSection */ "./resources/js/Jetstream/FormSection.vue");
+/* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
+/* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
+/* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"],
+    JetActionMessage: _Jetstream_ActionMessage__WEBPACK_IMPORTED_MODULE_0__["default"],
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_1__["default"],
+    JetDangerButton: _Jetstream_DangerButton__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_3__["default"],
+    JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__["default"],
+    JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__["default"],
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  data: function data() {
+    return {
+      addGarbageBinForm: this.$inertia.form({
+        name: null,
+        address: null,
+        city: null
+      }, {
+        bag: 'addGarbageBin',
+        resetOnSuccess: true
+      })
+    };
+  },
+  methods: {
+    submit: function submit() {
+      this.addGarbageBinForm.post(route('overview.add'));
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Edit.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Overview/Edit.vue?vue&type=script&lang=js& ***!
@@ -3735,6 +3883,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3745,7 +3912,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    bin: Object
+    bin: Object,
+    location: Object
   },
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"],
@@ -3760,7 +3928,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editGarbageBinForm: this.$inertia.form({
-        name: this.bin.name
+        name: this.bin.name,
+        address: this.location.address,
+        city: this.location.city
       }, {
         bag: 'editGarbageBin',
         resetOnSuccess: true
@@ -41031,28 +41201,52 @@ var render = function() {
                         "l-marker",
                         { key: index, attrs: { "lat-lng": marker } },
                         [
-                          _c("l-popup", { staticClass: "text-center" }, [
-                            _c("b", [
-                              _vm._v(_vm._s(_vm.locations[index].bin.name))
-                            ]),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(
-                                  _vm.locations[index].bin.last_active_at
-                                ) +
-                                " "
-                            ),
-                            _c("br"),
-                            _vm._v(
-                              "\n                        Temp: " +
-                                _vm._s(_vm.locations[index].bin.temperature) +
-                                "°C, Distance: " +
-                                _vm._s(_vm.locations[index].bin.distance) +
-                                " cm\n\n\n                    "
-                            )
-                          ])
+                          _c(
+                            "l-popup",
+                            { staticClass: "text-center" },
+                            [
+                              _c("b", [
+                                _vm._v(_vm._s(_vm.locations[index].bin.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(
+                                    _vm.locations[index].bin.last_active_at
+                                  ) +
+                                  " "
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\n                        Temp: " +
+                                  _vm._s(_vm.locations[index].bin.temperature) +
+                                  "°C, Distance: " +
+                                  _vm._s(_vm.locations[index].bin.distance) +
+                                  "\n                        cm "
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "inertia-link",
+                                {
+                                  staticClass:
+                                    "text-indigo-600 hover:text-indigo-900",
+                                  attrs: {
+                                    href: _vm.route("overview.edit_form", {
+                                      bin: _vm.locations[index].bin.id
+                                    })
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            Edit\n                        "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -41166,7 +41360,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Name\n                                    "
+                                      "\n                                    Name\n                                "
                                     )
                                   ]
                                 ),
@@ -41179,7 +41373,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Temperature\n                                    "
+                                      "\n                                    Temperature\n                                "
                                     )
                                   ]
                                 ),
@@ -41192,7 +41386,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Distance\n                                    "
+                                      "\n                                    Distance\n                                "
                                     )
                                   ]
                                 ),
@@ -41205,7 +41399,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Updated at\n                                    "
+                                      "\n                                    Updated at\n                                "
                                     )
                                   ]
                                 ),
@@ -41231,9 +41425,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        " +
+                                        "\n                                    " +
                                           _vm._s(bin.name) +
-                                          "\n                                    "
+                                          "\n                                "
                                       )
                                     ]
                                   ),
@@ -41253,9 +41447,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            " +
+                                            "\n                                        " +
                                               _vm._s(bin.temperature) +
-                                              " °C\n                                        "
+                                              " °C\n                                    "
                                           )
                                         ]
                                       )
@@ -41277,9 +41471,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            " +
+                                            "\n                                        " +
                                               _vm._s(bin.distance) +
-                                              " cm\n                                        "
+                                              " cm\n                                    "
                                           )
                                         ]
                                       )
@@ -41301,9 +41495,9 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            " +
+                                            "\n                                        " +
                                               _vm._s(bin.last_active_at) +
-                                              "\n                                        "
+                                              "\n                                    "
                                           )
                                         ]
                                       )
@@ -41331,7 +41525,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            Bewerken\n                                        "
+                                            "\n                                        Edit\n                                    "
                                           )
                                         ]
                                       ),
@@ -41350,7 +41544,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n                                            Verwijderen\n                                            "
+                                            "\n                                            Delete\n                                            "
                                           )
                                         ]
                                       )
@@ -41360,7 +41554,45 @@ var render = function() {
                                 ])
                               }),
                               0
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("tfoot", [
+                              _c("tr", [
+                                _c("td"),
+                                _vm._v(" "),
+                                _c("td"),
+                                _vm._v(" "),
+                                _c("td"),
+                                _vm._v(" "),
+                                _c("td"),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium"
+                                  },
+                                  [
+                                    _c(
+                                      "inertia-link",
+                                      {
+                                        staticClass:
+                                          "text-green-600 hover:text-green-900",
+                                        attrs: {
+                                          href: _vm.route("overview.add_form")
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                                  Add\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            ])
                           ]
                         )
                       ]
@@ -41457,6 +41689,195 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass: "text-blue-500",
+                      attrs: { href: _vm.route("overview") }
+                    },
+                    [_vm._v("\n                Overview Bins\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-gray-500" }, [_vm._v("/")]),
+                  _vm._v("\n            Add\n        ")
+                ],
+                1
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "max-w-4xl mx-auto py-10 sm:px-6 lg:px-8" },
+        [
+          _c("jet-form-section", {
+            attrs: { vertical: true },
+            on: { submitted: _vm.submit },
+            scopedSlots: _vm._u([
+              {
+                key: "form",
+                fn: function() {
+                  return [
+                    _c(
+                      "div",
+                      [
+                        _c("jet-label", {
+                          attrs: { for: "name", value: "Name" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "name", type: "text", autofocus: "" },
+                          model: {
+                            value: _vm.addGarbageBinForm.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.addGarbageBinForm, "name", $$v)
+                            },
+                            expression: "addGarbageBinForm.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.addGarbageBinForm.error("name")
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-label", {
+                          attrs: { for: "address", value: "Address" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "address", type: "text" },
+                          model: {
+                            value: _vm.addGarbageBinForm.address,
+                            callback: function($$v) {
+                              _vm.$set(_vm.addGarbageBinForm, "address", $$v)
+                            },
+                            expression: "addGarbageBinForm.address"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.addGarbageBinForm.error("address")
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-label", {
+                          attrs: { for: "city", value: "City" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "city", type: "text" },
+                          model: {
+                            value: _vm.addGarbageBinForm.city,
+                            callback: function($$v) {
+                              _vm.$set(_vm.addGarbageBinForm, "city", $$v)
+                            },
+                            expression: "addGarbageBinForm.city"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.addGarbageBinForm.error("city")
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                },
+                proxy: true
+              },
+              {
+                key: "actions",
+                fn: function() {
+                  return [
+                    _c(
+                      "jet-action-message",
+                      {
+                        staticClass: "mr-3",
+                        attrs: { on: _vm.addGarbageBinForm.recentlySuccessful }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Created.\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "jet-button",
+                      {
+                        class: {
+                          "opacity-25": _vm.addGarbageBinForm.processing
+                        },
+                        attrs: { disabled: _vm.addGarbageBinForm.processing }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Opslaan\n                "
+                        )
+                      ]
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          })
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Edit.vue?vue&type=template&id=0d566bb2&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Overview/Edit.vue?vue&type=template&id=0d566bb2& ***!
@@ -41521,38 +41942,77 @@ var render = function() {
                 key: "form",
                 fn: function() {
                   return [
-                    _c("div", { staticClass: "flex" }, [
-                      _c(
-                        "div",
-                        { staticClass: "w-12/12" },
-                        [
-                          _c("jet-label", {
-                            staticClass: "w-full",
-                            attrs: { for: "name", value: "Name" }
-                          }),
-                          _vm._v(" "),
-                          _c("jet-input", {
-                            staticClass: "w-full",
-                            attrs: { id: "name", type: "text", autofocus: "" },
-                            model: {
-                              value: _vm.editGarbageBinForm.name,
-                              callback: function($$v) {
-                                _vm.$set(_vm.editGarbageBinForm, "name", $$v)
-                              },
-                              expression: "editGarbageBinForm.name"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("jet-input-error", {
-                            staticClass: "w-full mx-8 mt-2",
-                            attrs: {
-                              message: _vm.editGarbageBinForm.error("name")
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
+                    _c(
+                      "div",
+                      [
+                        _c("jet-label", {
+                          attrs: { for: "name", value: "Name" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "name", type: "text", autofocus: "" },
+                          model: {
+                            value: _vm.editGarbageBinForm.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.editGarbageBinForm, "name", $$v)
+                            },
+                            expression: "editGarbageBinForm.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.editGarbageBinForm.error("name")
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-label", {
+                          attrs: { for: "address", value: "Address" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "address", type: "text" },
+                          model: {
+                            value: _vm.editGarbageBinForm.address,
+                            callback: function($$v) {
+                              _vm.$set(_vm.editGarbageBinForm, "address", $$v)
+                            },
+                            expression: "editGarbageBinForm.address"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.editGarbageBinForm.error("address")
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-label", {
+                          attrs: { for: "city", value: "City" }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input", {
+                          attrs: { id: "city", type: "text" },
+                          model: {
+                            value: _vm.editGarbageBinForm.city,
+                            callback: function($$v) {
+                              _vm.$set(_vm.editGarbageBinForm, "city", $$v)
+                            },
+                            expression: "editGarbageBinForm.city"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("jet-input-error", {
+                          staticClass: "mx-8 mt-2",
+                          attrs: {
+                            message: _vm.editGarbageBinForm.error("city")
+                          }
+                        })
+                      ],
+                      1
+                    )
                   ]
                 },
                 proxy: true
@@ -69221,6 +69681,8 @@ var map = {
 	"./Map.vue": "./resources/js/Pages/Map.vue",
 	"./Overview": "./resources/js/Pages/Overview.vue",
 	"./Overview.vue": "./resources/js/Pages/Overview.vue",
+	"./Overview/Add": "./resources/js/Pages/Overview/Add.vue",
+	"./Overview/Add.vue": "./resources/js/Pages/Overview/Add.vue",
 	"./Overview/Edit": "./resources/js/Pages/Overview/Edit.vue",
 	"./Overview/Edit.vue": "./resources/js/Pages/Overview/Edit.vue",
 	"./Profile/DeleteUserForm": "./resources/js/Pages/Profile/DeleteUserForm.vue",
@@ -69617,6 +70079,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overview_vue_vue_type_template_id_9ff960bc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overview_vue_vue_type_template_id_9ff960bc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Overview/Add.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/Pages/Overview/Add.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=a02860d8& */ "./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8&");
+/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Overview/Add.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=a02860d8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Overview/Add.vue?vue&type=template&id=a02860d8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_a02860d8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -70191,8 +70722,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\SmartCities\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\SmartCities\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\Nick Soesbergen\PhpstormProjects\SmartCities\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Nick Soesbergen\PhpstormProjects\SmartCities\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

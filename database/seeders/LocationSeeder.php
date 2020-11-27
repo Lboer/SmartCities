@@ -17,18 +17,18 @@ class LocationSeeder extends Seeder
         DB::table('location')->insert([[
             "id" => 1,
             "garbage_bin_id" => 1,
-            "x" => 27.50,
-            "y" => 30.75
+            "x" => 5.219310,
+            "y" => 52.368170
         ],[
             "id" => 2,
             "garbage_bin_id" => 2,
-            "x" => 93.12,
-            "y" => 75.41
+            "x" => 5.192910,
+            "y" => 52.363360
         ],[
             "id" => 3,
             "garbage_bin_id" => 3,
-            "x" => 67.37,
-            "y" => 88.42
+            "x" => 5.181260,
+            "y" => 52.388580
         ]]
     );
     }

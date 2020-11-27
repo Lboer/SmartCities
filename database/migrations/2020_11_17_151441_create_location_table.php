@@ -16,8 +16,10 @@ class CreateLocationTable extends Migration
         Schema::create('location', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('garbage_bin_id');
-            $table->float('x');
-            $table->float('y');
+            $table->float('x', 15, 10)->nullable()->default(null);
+            $table->float('y', 15, 10)->nullable()->default(null);
+            $table->string('address')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('garbage_bin_id')->references('id')->on('garbage_bin')->onDelete('CASCADE');

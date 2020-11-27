@@ -14,53 +14,68 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
-                                    <tr>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Temperature
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Distance
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                            Updated at
-                                        </th>
-                                        <th class="px-6 py-3 bg-gray-50"></th>
-                                    </tr>
+                                <tr>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Name
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Temperature
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Distance
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Updated at
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50"></th>
+                                </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr v-for="bin in bins" :key="bin.id">
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            {{ bin.name }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.temperature }} °C
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.distance }} cm
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap">
-                                            <div class="text-sm leading-5 text-gray-900">
-                                                {{ bin.last_active_at }}
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                            <inertia-link :href="route('overview.edit_form', {bin: bin.id})" class="text-indigo-600 hover:text-indigo-900">
-                                                Bewerken
-                                            </inertia-link>
+                                <tr v-for="bin in bins" :key="bin.id">
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        {{ bin.name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ bin.temperature }} °C
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ bin.distance }} cm
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ bin.last_active_at }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <inertia-link :href="route('overview.edit_form', {bin: bin.id})"
+                                                      class="text-indigo-600 hover:text-indigo-900">
+                                            Edit
+                                        </inertia-link>
 
-                                            <span @click="garbageBinBeingDeleted = bin.id" class="text-red-600 hover:text-red-900 ml-3 cursor-pointer">
-                                                Verwijderen
+                                        <span @click="garbageBinBeingDeleted = bin.id"
+                                              class="text-red-600 hover:text-red-900 ml-3 cursor-pointer">
+                                                Delete
                                                 </span>
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                                        <inertia-link :href="route('overview.add_form')" class="text-green-600 hover:text-green-900">
+                                                      Add
+                                        </inertia-link>
+                                    </td>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -80,7 +95,9 @@
                         Never Mind
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click.native="deleteGarbageBin" :class="{ 'opacity-25': deleteApiTokenForm.processing }" :disabled="deleteApiTokenForm.processing">
+                    <jet-danger-button class="ml-2" @click.native="deleteGarbageBin"
+                                       :class="{ 'opacity-25': deleteApiTokenForm.processing }"
+                                       :disabled="deleteApiTokenForm.processing">
                         Delete
                     </jet-danger-button>
                 </template>
@@ -90,39 +107,38 @@
 </template>
 
 <script>
-import AppLayout from './../Layouts/AppLayout';
-import Container from './../Components/Container';
-import JetConfirmationModal from "../Jetstream/ConfirmationModal";
-import JetSecondaryButton from "../Jetstream/SecondaryButton";
-import JetDangerButton from "../Jetstream/DangerButton";
+    import AppLayout from './../Layouts/AppLayout';
+    import Container from './../Components/Container';
+    import JetConfirmationModal from "../Jetstream/ConfirmationModal";
+    import JetSecondaryButton from "../Jetstream/SecondaryButton";
+    import JetDangerButton from "../Jetstream/DangerButton";
 
-export default {
-    components: {
-        AppLayout,
-        Container,
-        JetConfirmationModal,
-        JetSecondaryButton,
-        JetDangerButton
-    },
-    props: {
-        bins: Array
-    },
-    data() {
-        return {
-            deleteApiTokenForm: this.$inertia.form(),
-            garbageBinBeingDeleted: null,
-        }
-    },
-    methods: {
-        deleteGarbageBin(arg)
-        {
-            this.deleteApiTokenForm.delete(route('overview.delete', this.garbageBinBeingDeleted), {
-                preserveScroll: true,
-                preserveState: true,
-            }).then(() => {
-                this.garbageBinBeingDeleted = null
-            });
+    export default {
+        components: {
+            AppLayout,
+            Container,
+            JetConfirmationModal,
+            JetSecondaryButton,
+            JetDangerButton
+        },
+        props: {
+            bins: Array
+        },
+        data() {
+            return {
+                deleteApiTokenForm: this.$inertia.form(),
+                garbageBinBeingDeleted: null,
+            }
+        },
+        methods: {
+            deleteGarbageBin(arg) {
+                this.deleteApiTokenForm.delete(route('overview.delete', this.garbageBinBeingDeleted), {
+                    preserveScroll: true,
+                    preserveState: true,
+                }).then(() => {
+                    this.garbageBinBeingDeleted = null
+                });
+            }
         }
     }
-}
 </script>
