@@ -19,7 +19,8 @@ class GarbageBin extends Model
         "lon",
         'percentage_full',
         "on_fire",
-        "last_active_at"
+        "last_active_at",
+        "name"
     ];
 
     protected $casts = [
