@@ -36,6 +36,14 @@ class OverviewController extends Controller
         return Inertia::render("Overview/Add");
     }
 
+    public function showBin(GarbageBin $bin)
+    {
+        return Inertia::render("Overview/View", [
+            "bin" => $bin,
+            "records" => $bin->values()->orderBy('created_at', 'desc')->get()
+        ]);
+    }
+
     public function add(Request $request)
     {
         //Validate request
@@ -48,7 +56,7 @@ class OverviewController extends Controller
         //Make API call for location
         $location = $request['address'] . ' ' . $request['city'] . ' ';
         $client = new GuzzleHttp\Client();
-        $api = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey=36540946f91a4e36996fd4e370d9225b');
+        $api = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey='.env('GEOAPIFY_KEY'));
 
         //If API returns valuable location data create bin with location data otherwise create bin without location data
         if ($api->getStatusCode() == 200 && count(json_decode($api->getBody())->features) !== 0) {
