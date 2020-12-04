@@ -29,4 +29,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
     Route::delete('/overview/{bin}', 'OverviewController@delete')->name('overview.delete');
 
     Route::get("/map", "MapController@index")->name("map");
+
+    Route::get("/analytics", "AnalyticsController@index")->name("analytics");
 });
