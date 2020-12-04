@@ -23,6 +23,9 @@
                             <jet-nav-link :href="route('map')" :active="route().current('map')">
                                 Map
                             </jet-nav-link>
+                            <jet-nav-link :href="route('analytics')" :active="route().current('analytics')">
+                                Analytics
+                            </jet-nav-link>
                         </div>
                     </div>
 
