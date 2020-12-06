@@ -41,4 +41,10 @@ class GarbageBinController extends Controller
             'success' => true
         ], 201);
     }
+
+    public function getAnalytics($bin, Request $request)
+    {
+        $data = Value::where("garbage_bin_id", "=", $bin)->get();
+        return $data;
+    }
 }

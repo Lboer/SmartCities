@@ -22,11 +22,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Charts $charts)
+    public function boot()
     {
-        $charts->register([
-            \App\Charts\AnalyticsChart::class
-            // \App\Charts\SampleChart::class
-        ]);
+        //
     }
 }
