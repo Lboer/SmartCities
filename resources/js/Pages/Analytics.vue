@@ -25,6 +25,7 @@
                             :chartdata="chartdata"
                             :options="options"
                             />
+                            <p class="container my-8 text-center" v-if="warning">This bin does not have enough data to create a graph.</p>
                         </div>
                     </template>
                 </div>
@@ -43,30 +44,44 @@
         },
         methods:{
             async selectBin(event){
+
                 if(event.target.value != "select"){
                     try{
                         let promise = await fetch('api/data/' + event.target.value)
                         .then(response => response.json())
-                        console.log(promise[0].percentage_full, promise[1].percentage_full)
                         /** TO DO : Change from an array to a single object */
-                        this.chartdata = {
-                            labels: [promise[0].updated_at, promise[1].updated_at],
-                            dataset: [{
-                                label: "Fullness",
-                                backgroundColor: '#f87979',
-                                data: [promise[0].percentage_full, promise[1].percentage_full]
-                            }]
-                        };
-                        this.options = {
-                            responsive: true,
-                            maintainAspectRatio: false
+                        if(promise.length > 1){
+                            this.warning = false;
+                            this.chartdata = {
+                                labels: [this.showDate(promise[0].updated_at), this.showDate(promise[1].updated_at)],
+                                datasets: [{
+                                    label: "Fullness",
+                                    backgroundColor: '#f87979',
+                                    data: [promise[0].percentage_full, promise[1].percentage_full]
+                                }]
+                            };
+                            this.options = {
+                                responsive: true,
+                                maintainAspectRatio: false
+                            }
+                            this.loaded = true;
                         }
-                        this.loaded = true;
+                        else{
+                            this.loaded = false;
+                            this.warning = true;
+                        }
                     } catch (e) {
                     console.error(e)
                     }
                 }
             },
+            showDate(date){
+                let dateParts = date.split("-");
+                let shortDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2)).toLocaleDateString('en-US');
+                let hourParts = date.split("T");
+                let time = hourParts[1].substr(0,5);
+                return shortDate + " " + time;
+            }
         },
         name: 'LineChartContainer',
         components: {
@@ -76,7 +91,8 @@
         data: () => ({
             loaded: false,
             chartdata: null,
-            options: null
+            options: null,
+            warning: false
         }),
     }
 </script>

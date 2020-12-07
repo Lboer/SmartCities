@@ -3499,6 +3499,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3516,7 +3517,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(event.target.value != "select")) {
-                  _context.next = 14;
+                  _context.next = 11;
                   break;
                 }
 
@@ -3528,37 +3529,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 promise = _context.sent;
-                console.log(promise[0].percentage_full, promise[1].percentage_full);
-                /** TO DO : Change from an array to a single object */
 
-                _this.chartdata = {
-                  labels: [promise[0].updated_at, promise[1].updated_at],
-                  dataset: [{
-                    label: "Fullness",
-                    backgroundColor: '#f87979',
-                    data: [promise[0].percentage_full, promise[1].percentage_full]
-                  }]
-                };
-                _this.options = {
-                  responsive: true,
-                  maintainAspectRatio: false
-                };
-                _this.loaded = true;
-                _context.next = 14;
+                /** TO DO : Change from an array to a single object */
+                if (promise.length > 1) {
+                  _this.warning = false;
+                  _this.chartdata = {
+                    labels: [_this.showDate(promise[0].updated_at), _this.showDate(promise[1].updated_at)],
+                    datasets: [{
+                      label: "Fullness",
+                      backgroundColor: '#f87979',
+                      data: [promise[0].percentage_full, promise[1].percentage_full]
+                    }]
+                  };
+                  _this.options = {
+                    responsive: true,
+                    maintainAspectRatio: false
+                  };
+                  _this.loaded = true;
+                } else {
+                  _this.loaded = false;
+                  _this.warning = true;
+                }
+
+                _context.next = 11;
                 break;
 
-              case 11:
-                _context.prev = 11;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 14:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 11]]);
+        }, _callee, null, [[1, 8]]);
       }))();
+    },
+    showDate: function showDate(date) {
+      var dateParts = date.split("-");
+      var shortDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2)).toLocaleDateString('en-US');
+      var hourParts = date.split("T");
+      var time = hourParts[1].substr(0, 5);
+      return shortDate + " " + time;
     }
   },
   name: 'LineChartContainer',
@@ -3570,7 +3584,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       loaded: false,
       chartdata: null,
-      options: null
+      options: null,
+      warning: false
     };
   }
 });
@@ -80519,6 +80534,14 @@ var render = function() {
                             options: _vm.options
                           }
                         })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.warning
+                      ? _c("p", { staticClass: "container my-8 text-center" }, [
+                          _vm._v(
+                            "This bin does not have enough data to create a graph."
+                          )
+                        ])
                       : _vm._e()
                   ],
                   1
