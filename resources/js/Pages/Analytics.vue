@@ -44,21 +44,24 @@
         },
         methods:{
             async selectBin(event){
-
+                this.loaded = false;
                 if(event.target.value != "select"){
                     try{
                         let promise = await fetch('api/data/' + event.target.value)
                         .then(response => response.json())
-                        /** TO DO : Change from an array to a single object */
                         if(promise.length > 1){
                             this.warning = false;
                             this.chartdata = {
-                                labels: [this.showDate(promise[0].updated_at), this.showDate(promise[1].updated_at)],
+                                labels: [],
                                 datasets: [{
                                     label: "Fullness",
-                                    backgroundColor: '#f87979',
-                                    data: [promise[0].percentage_full, promise[1].percentage_full]
+                                    backgroundColor: '#72bcd4',
+                                    data: []
                                 }]
+                            };
+                            for(let i = 0; i < promise.length; i++){
+                                this.chartdata.labels.push(this.showDate(promise[i].updated_at))
+                                this.chartdata.datasets[0].data.push(promise[i].percentage_full)
                             };
                             this.options = {
                                 responsive: true,
@@ -75,12 +78,13 @@
                     }
                 }
             },
+            /** From SQL Timestamps to short date with time in hh:mm */
             showDate(date){
                 let dateParts = date.split("-");
                 let shortDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2)).toLocaleDateString('en-US');
                 let hourParts = date.split("T");
                 let time = hourParts[1].substr(0,5);
-                return shortDate + " " + time;
+                return time + " " + shortDate;
             }
         },
         name: 'LineChartContainer',

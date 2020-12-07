@@ -3511,36 +3511,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var promise;
+        var promise, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.loaded = false;
+
                 if (!(event.target.value != "select")) {
-                  _context.next = 11;
+                  _context.next = 12;
                   break;
                 }
 
-                _context.prev = 1;
-                _context.next = 4;
+                _context.prev = 2;
+                _context.next = 5;
                 return fetch('api/data/' + event.target.value).then(function (response) {
                   return response.json();
                 });
 
-              case 4:
+              case 5:
                 promise = _context.sent;
 
-                /** TO DO : Change from an array to a single object */
                 if (promise.length > 1) {
                   _this.warning = false;
                   _this.chartdata = {
-                    labels: [_this.showDate(promise[0].updated_at), _this.showDate(promise[1].updated_at)],
+                    labels: [],
                     datasets: [{
                       label: "Fullness",
-                      backgroundColor: '#f87979',
-                      data: [promise[0].percentage_full, promise[1].percentage_full]
+                      backgroundColor: '#72bcd4',
+                      data: []
                     }]
                   };
+
+                  for (i = 0; i < promise.length; i++) {
+                    _this.chartdata.labels.push(_this.showDate(promise[i].updated_at));
+
+                    _this.chartdata.datasets[0].data.push(promise[i].percentage_full);
+                  }
+
+                  ;
                   _this.options = {
                     responsive: true,
                     maintainAspectRatio: false
@@ -3551,28 +3560,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.warning = true;
                 }
 
-                _context.next = 11;
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
-                _context.t0 = _context["catch"](1);
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
                 console.error(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee, null, [[2, 9]]);
       }))();
     },
+
+    /** From SQL Timestamps to short date with time in hh:mm */
     showDate: function showDate(date) {
       var dateParts = date.split("-");
       var shortDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2)).toLocaleDateString('en-US');
       var hourParts = date.split("T");
       var time = hourParts[1].substr(0, 5);
-      return shortDate + " " + time;
+      return time + " " + shortDate;
     }
   },
   name: 'LineChartContainer',
