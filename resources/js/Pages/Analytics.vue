@@ -23,6 +23,7 @@
                             <line-chart
                             v-if="loaded"
                             :chartdata="chartdata"
+                            :options="options"
                             />
                         </div>
                     </template>
@@ -46,9 +47,20 @@
                     try{
                         let promise = await fetch('api/data/' + event.target.value)
                         .then(response => response.json())
-                        console.log(promise)
+                        console.log(promise[0].percentage_full, promise[1].percentage_full)
                         /** TO DO : Change from an array to a single object */
-                        this.chartdata = promise;
+                        this.chartdata = {
+                            labels: [promise[0].updated_at, promise[1].updated_at],
+                            dataset: [{
+                                label: "Fullness",
+                                backgroundColor: '#f87979',
+                                data: [promise[0].percentage_full, promise[1].percentage_full]
+                            }]
+                        };
+                        this.options = {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
                         this.loaded = true;
                     } catch (e) {
                     console.error(e)
@@ -63,7 +75,8 @@
             },
         data: () => ({
             loaded: false,
-            chartdata: null
+            chartdata: null,
+            options: null
         }),
     }
 </script>

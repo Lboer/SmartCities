@@ -3498,6 +3498,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3515,7 +3516,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(event.target.value != "select")) {
-                  _context.next = 13;
+                  _context.next = 14;
                   break;
                 }
 
@@ -3527,25 +3528,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 promise = _context.sent;
-                console.log(promise);
+                console.log(promise[0].percentage_full, promise[1].percentage_full);
                 /** TO DO : Change from an array to a single object */
 
-                _this.chartdata = promise;
+                _this.chartdata = {
+                  labels: [promise[0].updated_at, promise[1].updated_at],
+                  dataset: [{
+                    label: "Fullness",
+                    backgroundColor: '#f87979',
+                    data: [promise[0].percentage_full, promise[1].percentage_full]
+                  }]
+                };
+                _this.options = {
+                  responsive: true,
+                  maintainAspectRatio: false
+                };
                 _this.loaded = true;
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 11:
+                _context.prev = 11;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 11]]);
       }))();
     }
   },
@@ -3557,7 +3569,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       loaded: false,
-      chartdata: null
+      chartdata: null,
+      options: null
     };
   }
 });
@@ -80501,7 +80514,10 @@ var render = function() {
                   [
                     _vm.loaded
                       ? _c("line-chart", {
-                          attrs: { chartdata: _vm.chartdata }
+                          attrs: {
+                            chartdata: _vm.chartdata,
+                            options: _vm.options
+                          }
                         })
                       : _vm._e()
                   ],
