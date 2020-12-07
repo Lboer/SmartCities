@@ -18,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 Route::get('/data/{bin}', 'GarbageBinController@getAnalytics');
-Route::post('/bins/{token}', 'GarbageBinController@process');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function(){
+    Route::post('/bins/{token}', 'GarbageBinController@process');
+});

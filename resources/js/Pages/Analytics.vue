@@ -10,8 +10,8 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <select id="selectBin" @change="selectBin"
-                                    class="w-full mb-8 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                    <option>Select a bin</option>
+                                    class="w-6/12 flex my-8 mx-auto items-center shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="select">Select a bin</option>
                                 <option v-for="bin in bins"
                                         :key="bin.id"
                                         :value="bin.id">
@@ -19,7 +19,7 @@
                                 </option>
                             </select>
                     <template>
-                        <div class="container">
+                        <div class="container my-8">
                             <line-chart
                             v-if="loaded"
                             :chartdata="chartdata"
@@ -41,17 +41,20 @@
             bins: Array
         },
         methods:{
-            selectBin(event){
-                try{
-                    let data = fetch('api/data/' + event.target.value);
-                    console.log(data);
-                    this.chartdata = data;
-                    this.loaded = true;
-                } catch (e) {
-                   console.error(e)
+            async selectBin(event){
+                if(event.target.value != "select"){
+                    try{
+                        let promise = await fetch('api/data/' + event.target.value)
+                        .then(response => response.json())
+                        console.log(promise)
+                        /** TO DO : Change from an array to a single object */
+                        this.chartdata = promise;
+                        this.loaded = true;
+                    } catch (e) {
+                    console.error(e)
+                    }
                 }
-                
-            }
+            },
         },
         name: 'LineChartContainer',
         components: {
@@ -62,17 +65,5 @@
             loaded: false,
             chartdata: null
         }),
-        // async mounted () {
-        //     this.loaded = false
-        //     try {
-        //     let { userlist } = await fetch('/api/data/2')
-            
-        //     if(this.chartdata != undefined){
-        //         this.loaded = true
-        //     }
-        //     } catch (e) {
-        //     console.error(e)
-        //     }
-        // }
     }
 </script>
