@@ -3552,7 +3552,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   ;
                   _this.options = {
                     responsive: true,
-                    maintainAspectRatio: false
+                    maintainAspectRatio: false,
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          max: 100,
+                          min: 0,
+                          stepSize: 10
+                        }
+                      }]
+                    }
                   };
                   _this.loaded = true;
                 } else {

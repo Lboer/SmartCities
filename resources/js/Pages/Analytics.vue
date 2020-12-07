@@ -65,7 +65,16 @@
                             };
                             this.options = {
                                 responsive: true,
-                                maintainAspectRatio: false
+                                maintainAspectRatio: false,
+                                scales: {
+                                    yAxes: [{
+                                        ticks:{
+                                            max: 100,
+                                            min: 0,
+                                            stepSize: 10
+                                        }
+                                    }]
+                                }
                             }
                             this.loaded = true;
                         }
