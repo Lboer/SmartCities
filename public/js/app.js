@@ -3458,6 +3458,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Pages_Analytics_Chart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Pages/Analytics/Chart.vue */ "./resources/js/Pages/Analytics/Chart.vue");
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3500,6 +3501,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3516,20 +3521,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this.predictAmmount = 0;
+                _this.predictTotalAdded = 0;
+                _this.predictMedianAdd = 0;
                 _this.loaded = false;
 
                 if (!(event.target.value != "select")) {
-                  _context.next = 12;
+                  _context.next = 15;
                   break;
                 }
 
-                _context.prev = 2;
-                _context.next = 5;
+                _context.prev = 5;
+                _context.next = 8;
                 return fetch('api/data/' + event.target.value).then(function (response) {
                   return response.json();
                 });
 
-              case 5:
+              case 8:
                 promise = _context.sent;
 
                 if (promise.length > 1) {
@@ -3569,20 +3577,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.warning = true;
                 }
 
-                _context.next = 12;
+                _context.next = 15;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](5);
                 console.error(_context.t0);
 
-              case 12:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9]]);
+        }, _callee, null, [[5, 12]]);
       }))();
     },
 
@@ -3593,19 +3601,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var hourParts = date.split("T");
       var time = hourParts[1].substr(0, 5);
       return time + " " + shortDate;
+    },
+
+    /** predict the next half hour */
+    predictFullness: function predictFullness(event) {
+      // get the median increase
+      for (var i = 1; i < this.chartdata.labels.length; i++) {
+        if (this.chartdata.datasets[0].data[i - 1] < this.chartdata.datasets[0].data[i]) {
+          this.predictAmmount++;
+          this.predictTotalAdded += this.chartdata.datasets[0].data[i] - this.chartdata.datasets[0].data[i - 1];
+        }
+      }
+
+      this.predictMedianAdd = this.predictTotalAdded / this.predictAmmount;
+      var beginValue = this.chartdata.datasets[0].data[this.chartdata.datasets[0].data.length - 1];
+
+      for (var _i = 0; _i < 6; _i++) {
+        beginValue = this.safeIncrease(beginValue);
+        console.log(beginValue);
+      }
+    },
+    safeIncrease: function safeIncrease(value) {
+      value += this.predictMedianAdd;
+
+      if (value > 100) {
+        value = 100;
+      }
+
+      return value;
     }
   },
   name: 'LineChartContainer',
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"],
-    LineChart: _Pages_Analytics_Chart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    LineChart: _Pages_Analytics_Chart_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
       loaded: false,
       chartdata: null,
       options: null,
-      warning: false
+      warning: false,
+      predicted: false,
+      predictAmmount: 0,
+      predictTotalAdded: 0,
+      predictMedianAdd: 0
     };
   }
 });
@@ -80562,6 +80603,25 @@ var render = function() {
                             "This bin does not have enough data to create a graph."
                           )
                         ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.loaded
+                      ? _c(
+                          "jet-button",
+                          {
+                            staticClass: "flex my-8 mx-auto items-center",
+                            nativeOn: {
+                              click: function($event) {
+                                return _vm.predictFullness($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Predict the next half hour\n                        "
+                            )
+                          ]
+                        )
                       : _vm._e()
                   ],
                   1

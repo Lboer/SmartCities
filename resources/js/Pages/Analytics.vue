@@ -26,6 +26,9 @@
                             :options="options"
                             />
                             <p class="container my-8 text-center" v-if="warning">This bin does not have enough data to create a graph.</p>
+                            <jet-button class="flex my-8 mx-auto items-center" @click.native="predictFullness" v-if="loaded">
+                                Predict the next half hour
+                            </jet-button>
                         </div>
                     </template>
                 </div>
@@ -37,6 +40,7 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import LineChart from '@/Pages/Analytics/Chart.vue'
+    import JetButton from '@/Jetstream/Button.vue'
 
     export default {
         props:{
@@ -44,6 +48,9 @@
         },
         methods:{
             async selectBin(event){
+                this.predictAmmount = 0;
+                this.predictTotalAdded = 0;
+                this.predictMedianAdd = 0;
                 this.loaded = false;
                 if(event.target.value != "select"){
                     try{
@@ -94,18 +101,46 @@
                 let hourParts = date.split("T");
                 let time = hourParts[1].substr(0,5);
                 return time + " " + shortDate;
+            },
+            /** predict the next half hour */
+            predictFullness(event){
+                // get the median increase
+                for(let i = 1; i < this.chartdata.labels.length; i++){
+                    if(this.chartdata.datasets[0].data[i-1] < this.chartdata.datasets[0].data[i]){
+                        this.predictAmmount++;
+                        this.predictTotalAdded += this.chartdata.datasets[0].data[i] - this.chartdata.datasets[0].data[i-1];
+                    }
+                }
+                this.predictMedianAdd = this.predictTotalAdded / this.predictAmmount;
+                let beginValue = this.chartdata.datasets[0].data[this.chartdata.datasets[0].data.length-1];
+                for(let i = 0; i < 6; i++){
+                    beginValue = this.safeIncrease(beginValue);
+                    console.log(beginValue)
+                }
+            },
+            safeIncrease(value){
+                value += this.predictMedianAdd;
+                if(value > 100){
+                    value = 100;
+                }
+                return value;
             }
         },
         name: 'LineChartContainer',
         components: {
             AppLayout, 
-            LineChart 
+            LineChart,
+            JetButton
             },
         data: () => ({
             loaded: false,
             chartdata: null,
             options: null,
-            warning: false
+            warning: false,
+            predicted: false,
+            predictAmmount: 0,
+            predictTotalAdded: 0,
+            predictMedianAdd: 0
         }),
     }
 </script>
