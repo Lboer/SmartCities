@@ -3504,6 +3504,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3571,7 +3574,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       }]
                     }
                   };
-                  _this.loaded = true;
+
+                  _this.showChart();
                 } else {
                   _this.loaded = false;
                   _this.warning = true;
@@ -3605,7 +3609,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     /** predict the next half hour */
     predictFullness: function predictFullness(event) {
-      // get the median increase
+      this.loaded = false; // get the median increase
+
       for (var i = 1; i < this.chartdata.labels.length; i++) {
         if (this.chartdata.datasets[0].data[i - 1] < this.chartdata.datasets[0].data[i]) {
           this.predictAmmount++;
@@ -3618,8 +3623,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       for (var _i = 0; _i < 6; _i++) {
         beginValue = this.safeIncrease(beginValue);
-        console.log(beginValue);
+        this.chartdata.labels.push("predict +" + (_i + 1) * 5 + " mins");
+        this.chartdata.datasets[0].data.push(beginValue);
       }
+
+      this.predicted = true;
     },
     safeIncrease: function safeIncrease(value) {
       value += this.predictMedianAdd;
@@ -3629,6 +3637,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return value;
+    },
+    showChart: function showChart() {
+      this.loaded = true;
+      this.predicted = false;
     }
   },
   name: 'LineChartContainer',
@@ -80619,6 +80631,25 @@ var render = function() {
                           [
                             _vm._v(
                               "\n                            Predict the next half hour\n                        "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.predicted
+                      ? _c(
+                          "jet-button",
+                          {
+                            staticClass: "flex my-8 mx-auto items-center",
+                            nativeOn: {
+                              click: function($event) {
+                                return _vm.showChart($event)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Render chart\n                        "
                             )
                           ]
                         )

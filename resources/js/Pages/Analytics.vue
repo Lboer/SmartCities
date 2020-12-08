@@ -29,6 +29,9 @@
                             <jet-button class="flex my-8 mx-auto items-center" @click.native="predictFullness" v-if="loaded">
                                 Predict the next half hour
                             </jet-button>
+                            <jet-button class="flex my-8 mx-auto items-center" @click.native="showChart" v-if="predicted">
+                                Render chart
+                            </jet-button>
                         </div>
                     </template>
                 </div>
@@ -83,7 +86,7 @@
                                     }]
                                 }
                             }
-                            this.loaded = true;
+                            this.showChart();
                         }
                         else{
                             this.loaded = false;
@@ -104,6 +107,7 @@
             },
             /** predict the next half hour */
             predictFullness(event){
+                this.loaded = false;
                 // get the median increase
                 for(let i = 1; i < this.chartdata.labels.length; i++){
                     if(this.chartdata.datasets[0].data[i-1] < this.chartdata.datasets[0].data[i]){
@@ -115,8 +119,10 @@
                 let beginValue = this.chartdata.datasets[0].data[this.chartdata.datasets[0].data.length-1];
                 for(let i = 0; i < 6; i++){
                     beginValue = this.safeIncrease(beginValue);
-                    console.log(beginValue)
+                    this.chartdata.labels.push("predict +" + ((i+1) * 5) + " mins")
+                    this.chartdata.datasets[0].data.push(beginValue)
                 }
+                this.predicted = true;
             },
             safeIncrease(value){
                 value += this.predictMedianAdd;
@@ -124,6 +130,10 @@
                     value = 100;
                 }
                 return value;
+            },
+            showChart(){
+                this.loaded = true;
+                this.predicted = false;
             }
         },
         name: 'LineChartContainer',
