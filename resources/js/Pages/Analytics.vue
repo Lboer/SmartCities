@@ -44,6 +44,7 @@
     import AppLayout from '@/Layouts/AppLayout'
     import LineChart from '@/Pages/Analytics/Chart.vue'
     import JetButton from '@/Jetstream/Button.vue'
+import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/ConfirmsPassword.vue'
 
     export default {
         props:{
@@ -100,15 +101,15 @@
             },
             /** From SQL Timestamps to short date with time in hh:mm */
             showDate(date){
-                let dateParts = date.split("-");
-                let shortDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2)).toLocaleDateString('en-US');
+                let shortDate = new Date(date).toLocaleDateString();
                 let hourParts = date.split("T");
-                let time = hourParts[1].substr(0,5);
+                let time = hourParts[1].substr(0,5) + ":00";
                 return time + " " + shortDate;
             },
             /** predict the next half hour */
             predictFullness(event){
                 this.loaded = false;
+                this.finalOriginalValue = this.chartdata.labels.length - 1;
                 // get the median increase
                 for(let i = 1; i < this.chartdata.labels.length; i++){
                     if(this.chartdata.datasets[0].data[i-1] < this.chartdata.datasets[0].data[i]){
@@ -120,7 +121,7 @@
                 let beginValue = this.chartdata.datasets[0].data[this.chartdata.datasets[0].data.length-1];
                 for(let i = 0; i < 6; i++){
                     beginValue = this.safeIncrease(beginValue);
-                    this.chartdata.labels.push("predict +" + ((i+1) * 5) + " mins")
+                    this.chartdata.labels.push(this.renderName((i+1)*5));
                     this.chartdata.datasets[0].data.push(beginValue)
                 }
                 this.predicted = true;
@@ -134,6 +135,14 @@
             },
             showChart(){
                 this.loaded = true;
+            },
+            renderName(value){
+                let oldDate = new Date(this.chartdata.labels[this.finalOriginalValue].replace("-", "/"));
+                let date = new Date(oldDate.getTime() + value*60000).toLocaleString();
+                let switchDate = date.split(" ");
+                let splitDate = switchDate[0].split("-");
+                let finalDate = splitDate[1] + "-" + splitDate[0] + "-" + splitDate[2];
+                return "prediction: " + switchDate[1] + " " + finalDate;
             }
         },
         name: 'LineChartContainer',
@@ -148,6 +157,7 @@
             options: null,
             warning: false,
             predicted: false,
+            finalOriginalValue: null,
             predictAmmount: 0,
             predictTotalAdded: 0,
             predictMedianAdd: 0
