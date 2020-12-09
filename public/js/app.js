@@ -3528,19 +3528,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.predictTotalAdded = 0;
                 _this.predictMedianAdd = 0;
                 _this.loaded = false;
+                _this.predicted = false;
 
                 if (!(event.target.value != "select")) {
-                  _context.next = 15;
+                  _context.next = 16;
                   break;
                 }
 
-                _context.prev = 5;
-                _context.next = 8;
+                _context.prev = 6;
+                _context.next = 9;
                 return fetch('api/data/' + event.target.value).then(function (response) {
                   return response.json();
                 });
 
-              case 8:
+              case 9:
                 promise = _context.sent;
 
                 if (promise.length > 1) {
@@ -3581,20 +3582,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.warning = true;
                 }
 
-                _context.next = 15;
+                _context.next = 16;
                 break;
 
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](5);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](6);
                 console.error(_context.t0);
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 12]]);
+        }, _callee, null, [[6, 13]]);
       }))();
     },
 

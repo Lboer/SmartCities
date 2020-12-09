@@ -55,6 +55,7 @@
                 this.predictTotalAdded = 0;
                 this.predictMedianAdd = 0;
                 this.loaded = false;
+                this.predicted = false;
                 if(event.target.value != "select"){
                     try{
                         let promise = await fetch('api/data/' + event.target.value)
