@@ -26,10 +26,10 @@
                             :options="options"
                             />
                             <p class="container my-8 text-center" v-if="warning">This bin does not have enough data to create a graph.</p>
-                            <jet-button class="flex my-8 mx-auto items-center" @click.native="predictFullness" v-if="loaded">
+                            <jet-button class="flex my-8 mx-auto items-center" @click.native="predictFullness" v-if="loaded && !predicted">
                                 Predict the next half hour
                             </jet-button>
-                            <jet-button class="flex my-8 mx-auto items-center" @click.native="showChart" v-if="predicted">
+                            <jet-button class="flex my-8 mx-auto items-center" @click.native="showChart" v-if="predicted && !loaded">
                                 Render chart
                             </jet-button>
                         </div>
@@ -133,7 +133,6 @@
             },
             showChart(){
                 this.loaded = true;
-                this.predicted = false;
             }
         },
         name: 'LineChartContainer',

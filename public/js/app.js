@@ -3640,7 +3640,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     showChart: function showChart() {
       this.loaded = true;
-      this.predicted = false;
     }
   },
   name: 'LineChartContainer',
@@ -80617,7 +80616,7 @@ var render = function() {
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.loaded
+                    _vm.loaded && !_vm.predicted
                       ? _c(
                           "jet-button",
                           {
@@ -80636,7 +80635,7 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.predicted
+                    _vm.predicted && !_vm.loaded
                       ? _c(
                           "jet-button",
                           {
