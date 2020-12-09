@@ -59,10 +59,13 @@ import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia
                 this.predicted = false;
                 if(event.target.value != "select"){
                     try{
+                        // get json data as a promise
                         let promise = await fetch('api/data/' + event.target.value)
                         .then(response => response.json())
+                        // If there are 2 or more points of data, create a graph
                         if(promise.length > 1){
                             this.warning = false;
+                            //set standard data
                             this.chartdata = {
                                 labels: [],
                                 datasets: [{
@@ -71,10 +74,12 @@ import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia
                                     data: []
                                 }]
                             };
+                            // for each data point in the promise, render in graph
                             for(let i = 0; i < promise.length; i++){
                                 this.chartdata.labels.push(this.showDate(promise[i].updated_at))
                                 this.chartdata.datasets[0].data.push(promise[i].percentage_full)
                             };
+                            // add chart with min of 0, max of 100 and steps of 10
                             this.options = {
                                 responsive: true,
                                 maintainAspectRatio: false,
@@ -90,6 +95,7 @@ import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia
                             }
                             this.showChart();
                         }
+                        // else tell user that a graph requires more data
                         else{
                             this.loaded = false;
                             this.warning = true;
@@ -136,6 +142,7 @@ import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia
             showChart(){
                 this.loaded = true;
             },
+            // render name with "prediction: " at the start, so the user knows it is not actual data.
             renderName(value){
                 let oldDate = new Date(this.chartdata.labels[this.finalOriginalValue].replace("-", "/"));
                 let date = new Date(oldDate.getTime() + value*60000).toLocaleString();

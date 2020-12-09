@@ -3546,8 +3546,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 9:
                 promise = _context.sent;
 
+                // If there are 2 or more points of data, create a graph
                 if (promise.length > 1) {
-                  _this.warning = false;
+                  _this.warning = false; //set standard data
+
                   _this.chartdata = {
                     labels: [],
                     datasets: [{
@@ -3555,7 +3557,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       backgroundColor: '#72bcd4',
                       data: []
                     }]
-                  };
+                  }; // for each data point in the promise, render in graph
 
                   for (i = 0; i < promise.length; i++) {
                     _this.chartdata.labels.push(_this.showDate(promise[i].updated_at));
@@ -3563,7 +3565,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.chartdata.datasets[0].data.push(promise[i].percentage_full);
                   }
 
-                  ;
+                  ; // add chart with min of 0, max of 100 and steps of 10
+
                   _this.options = {
                     responsive: true,
                     maintainAspectRatio: false,
@@ -3579,10 +3582,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   };
 
                   _this.showChart();
-                } else {
-                  _this.loaded = false;
-                  _this.warning = true;
-                }
+                } // else tell user that a graph requires more data
+                else {
+                    _this.loaded = false;
+                    _this.warning = true;
+                  }
 
                 _context.next = 16;
                 break;
@@ -3644,6 +3648,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     showChart: function showChart() {
       this.loaded = true;
     },
+    // render name with "prediction: " at the start, so the user knows it is not actual data.
     renderName: function renderName(value) {
       var oldDate = new Date(this.chartdata.labels[this.finalOriginalValue].replace("-", "/"));
       var date = new Date(oldDate.getTime() + value * 60000).toLocaleString();
