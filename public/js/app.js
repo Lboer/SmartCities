@@ -4010,6 +4010,12 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this.garbageBinBeingDeleted = null;
       });
+    },
+    showDate: function showDate(date) {
+      var shortDate = new Date(date).toLocaleDateString();
+      var hourParts = date.split("T");
+      var time = hourParts[1].substr(0, 5);
+      return time + " " + shortDate;
     }
   }
 });
@@ -81534,7 +81540,9 @@ var render = function() {
                                         [
                                           _vm._v(
                                             "\n                                        " +
-                                              _vm._s(bin.last_active_at) +
+                                              _vm._s(
+                                                _vm.showDate(bin.last_active_at)
+                                              ) +
                                               "\n                                    "
                                           )
                                         ]

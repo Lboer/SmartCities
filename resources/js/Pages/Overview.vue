@@ -52,7 +52,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div class="text-sm leading-5 text-gray-900">
-                                            {{ bin.last_active_at }}
+                                            {{ showDate(bin.last_active_at) }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
@@ -143,7 +143,13 @@
                 }).then(() => {
                     this.garbageBinBeingDeleted = null
                 });
-            }
+            },
+            showDate(date){
+                let shortDate = new Date(date).toLocaleDateString();
+                let hourParts = date.split("T");
+                let time = hourParts[1].substr(0,5);
+                return time + " " + shortDate;
+            },
         }
     }
 </script>
