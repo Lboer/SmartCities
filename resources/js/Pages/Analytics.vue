@@ -10,14 +10,17 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <select id="selectBin" @change="selectBin"
-                                    class="w-6/12 flex my-8 mx-auto items-center shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                    <option value="select">Select a bin</option>
-                                <option v-for="bin in bins"
-                                        :key="bin.id"
-                                        :value="bin.id">
-                                    {{ bin.name }}
-                                </option>
-                            </select>
+                        class="w-6/12 flex my-8 mx-auto items-center shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        
+                        <option value="select">Select a bin</option>
+                        
+                        <option v-for="bin in bins"
+                                :key="bin.id"
+                                :value="bin.id">
+                            {{ bin.name }}
+                        </option>
+                    </select>
+                    
                     <template>
                         <div class="container my-8">
                             <line-chart
@@ -26,12 +29,11 @@
                             :options="options"
                             />
                             <p class="container my-8 text-center" v-if="warning">This bin does not have enough data to create a graph.</p>
-                            <jet-button class="flex my-8 mx-auto items-center" @click.native="predictFullness" v-if="loaded && !predicted">
-                                Predict the next half hour
-                            </jet-button>
-                            <jet-button class="flex my-8 mx-auto items-center" @click.native="showChart" v-if="predicted && !loaded">
-                                Render chart
-                            </jet-button>
+                            <div class="w-full flex my-8 mx-auto items-center justify-center">
+                                <jet-button class="flex my-8 mx-auto items-center justify-center" @click.native="predictFullness" v-if="loaded && !predicted">
+                                    Predict the next half hour
+                                </jet-button>
+                            </div>
                         </div>
                     </template>
                 </div>
@@ -44,7 +46,6 @@
     import AppLayout from '@/Layouts/AppLayout'
     import LineChart from '@/Pages/Analytics/Chart.vue'
     import JetButton from '@/Jetstream/Button.vue'
-import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/ConfirmsPassword.vue'
 
     export default {
         props:{
@@ -130,7 +131,12 @@ import ConfirmsPasswordVue from '../../../vendor/laravel/jetstream/stubs/inertia
                     this.chartdata.labels.push(this.renderName((i+1)*5));
                     this.chartdata.datasets[0].data.push(beginValue)
                 }
+                // verstop de "predict the next half hour" button
                 this.predicted = true;
+                // gebruik een anonymous callback om de graph opnieuw te renderen
+                this.$nextTick( () => {
+                    this.showChart();
+                });
             },
             safeIncrease(value){
                 value += this.predictMedianAdd;
