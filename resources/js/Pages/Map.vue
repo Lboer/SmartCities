@@ -17,10 +17,9 @@
                             </inertia-link>
                             <br>
                             {{ bins[index].address }}, {{ bins[index].city }} <br>
-                            {{ bins[index].last_active_at }} <br>
-                            On fire: {{ bins[index].latest_value.on_fire }} , Full: {{
-                            bins[index].latest_value.percentage_full }}%
-                            cm <br>
+                            {{ showDate(bins[index].last_active_at) }} <br>
+                            Fire status: {{ onFire(bins[index].latest_value.on_fire) }} , Fullness: {{ bins[index].latest_value.percentage_full }}%
+                            <br>
                             <inertia-link :href="route('overview.edit_form', {bin: bins[index].id})"
                                           class="text-indigo-600 hover:text-indigo-900">
                                 Edit
@@ -106,6 +105,20 @@
             },
             submit() {
                 this.$inertia.post('/map/route', this.form)
+            },
+            /** From SQL Timestamps to short date with time in hh:mm */
+            showDate(date){
+                let shortDate = new Date(date).toLocaleDateString();
+                let hourParts = date.split("T");
+                let time = hourParts[1].substr(0,5);
+                return time + " " + shortDate;
+            },
+            onFire(status){
+                if(status == 0){
+                    return "not on fire."
+                } else {
+                    return "on fire!"
+                }
             }
         }
     }

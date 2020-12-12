@@ -3832,7 +3832,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3879,6 +3878,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     submit: function submit() {
       this.$inertia.post('/map/route', this.form);
+    },
+
+    /** From SQL Timestamps to short date with time in hh:mm */
+    showDate: function showDate(date) {
+      var shortDate = new Date(date).toLocaleDateString();
+      var hourParts = date.split("T");
+      var time = hourParts[1].substr(0, 5);
+      return time + " " + shortDate;
+    },
+    onFire: function onFire(status) {
+      if (status == 0) {
+        return "not on fire.";
+      } else {
+        return "on fire!";
+      }
     }
   }
 });
@@ -81091,18 +81105,24 @@ var render = function() {
                               _c("br"),
                               _vm._v(
                                 "\n                        " +
-                                  _vm._s(_vm.bins[index].last_active_at) +
+                                  _vm._s(
+                                    _vm.showDate(_vm.bins[index].last_active_at)
+                                  ) +
                                   " "
                               ),
                               _c("br"),
                               _vm._v(
-                                "\n                        On fire: " +
-                                  _vm._s(_vm.bins[index].latest_value.on_fire) +
-                                  " , Full: " +
+                                "\n                        Fire status: " +
+                                  _vm._s(
+                                    _vm.onFire(
+                                      _vm.bins[index].latest_value.on_fire
+                                    )
+                                  ) +
+                                  " , Fullness: " +
                                   _vm._s(
                                     _vm.bins[index].latest_value.percentage_full
                                   ) +
-                                  "%\n                        cm "
+                                  "%\n                        "
                               ),
                               _c("br"),
                               _vm._v(" "),
