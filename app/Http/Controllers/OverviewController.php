@@ -22,7 +22,7 @@ class OverviewController extends Controller
         // Call GeoApify API
         $location = $request['address'] . ' ' . $request['city'];
         $client = new GuzzleHTTP\Client();
-        $request = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey=36540946f91a4e36996fd4e370d9225b');
+        $request = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey='.env('GEOAPIFY_KEY'));
 
         // Get Lon and Lat if request is success and has relevant data
         if ($request->getStatusCode() == 200 && count(json_decode($request->getBody())->features) !== 0) {

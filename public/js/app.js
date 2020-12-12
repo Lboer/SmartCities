@@ -3634,9 +3634,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         beginValue = this.safeIncrease(beginValue);
         this.chartdata.labels.push(this.renderName((_i + 1) * 5));
         this.chartdata.datasets[0].data.push(beginValue);
-      }
+      } // verstop de "predict the next half hour" button
 
-      this.predicted = true;
+
+      this.predicted = true; // gebruik een anonymous callback om de graph opnieuw te renderen
+
       this.$nextTick(function () {
         _this2.showChart();
       });
@@ -3770,6 +3772,196 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Container: _Components_Container__WEBPACK_IMPORTED_MODULE_1__["default"],
+    LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMap"],
+    LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LTileLayer"],
+    LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMarker"],
+    LPopup: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPopup"],
+    LPolyline: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPolyline"],
+    JetButton: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  props: {
+    bins: Array
+  },
+  data: function data() {
+    return {
+      markers: null,
+      loading: 1,
+      zoom: 10,
+      center: Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(52.4040133, 5.2616974),
+      url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors| Powered by <a href="https://www.geoapify.com/">Geoapify</a>',
+      form: {
+        fullness: 70
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.setMarkers();
+  },
+  methods: {
+    setMarkers: function setMarkers() {
+      var markersArray = [];
+      this.bins.forEach(function (bin) {
+        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(bin.lat, bin.lon));
+      });
+      this.markers = markersArray;
+      this.loading = 0;
+    },
+    submit: function submit() {
+      this.$inertia.post('/map/route', this.form);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Components_Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Components/Container */ "./resources/js/Components/Container.vue");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
+/* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-leaflet */ "./node_modules/vue2-leaflet/dist/vue2-leaflet.es.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3823,34 +4015,39 @@ __webpack_require__.r(__webpack_exports__);
     Container: _Components_Container__WEBPACK_IMPORTED_MODULE_1__["default"],
     LMap: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMap"],
     LTileLayer: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LTileLayer"],
-    LMarker: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LMarker"],
-    LPopup: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPopup"]
+    LPolyline: vue2_leaflet__WEBPACK_IMPORTED_MODULE_3__["LPolyline"]
   },
   props: {
-    bins: Array
+    routeData: Object,
+    fullness: Number
   },
   data: function data() {
     return {
-      markers: null,
       loading: 1,
-      zoom: 10,
-      center: Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(52.4040133, 5.2616974),
+      zoom: 11,
+      center: Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(52.372020, 5.216710),
       url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors| Powered by <a href="https://www.geoapify.com/">Geoapify</a>'
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors| Powered by <a href="https://www.geoapify.com/">Geoapify</a>',
+      coordinates: []
     };
   },
   mounted: function mounted() {
-    this.setMarkers();
-  },
-  methods: {
-    setMarkers: function setMarkers() {
-      var markersArray = [];
-      this.bins.forEach(function (bin) {
-        markersArray.push(Object(leaflet__WEBPACK_IMPORTED_MODULE_2__["latLng"])(bin.lat, bin.lon));
-      });
-      this.markers = markersArray;
-      this.loading = 0;
-    }
+    var geometry = this.$props.routeData.geometry.coordinates;
+    var coordinates = this.coordinates;
+    this.$props.routeData.properties.legs.forEach(function (element, index) {
+      var leg = [];
+
+      for (var i = 0; i < geometry[index].length; i++) {
+        var _ref = [geometry[index][i][1], geometry[index][i][0]];
+        geometry[index][i][0] = _ref[0];
+        geometry[index][i][1] = _ref[1];
+        leg.push(geometry[index][i]);
+      }
+
+      coordinates.push(leg);
+    });
+    this.coordinates = coordinates;
+    this.loading = 0;
   }
 });
 
@@ -21465,7 +21662,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".map[data-v-6ffb2f43] {\n  height: 70vh;\n}\n", ""]);
+exports.push([module.i, ".map[data-v-6ffb2f43] {\n  height: 40vh;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".map[data-v-2a3c0d5d] {\n  height: 30vh;\n}\n", ""]);
 
 // exports
 
@@ -76702,6 +76918,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -80833,6 +81079,7 @@ var render = function() {
                                   ])
                                 ]
                               ),
+                              _vm._v(" "),
                               _c("br"),
                               _vm._v(
                                 "\n                        " +
@@ -80889,23 +81136,460 @@ var render = function() {
               ],
               1
             )
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex flex-col" }, [
-          _c(
-            "div",
-            { staticClass: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8" },
-            [
-              _c("div", {
-                staticClass:
-                  "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
-              })
-            ]
-          )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("container", [
+        _c("div", [
+          _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+            _c(
+              "div",
+              {
+                staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "p-6 sm:px-20 bg-white border-b border-gray-200"
+                  },
+                  [
+                    _c("div", { staticClass: "mt-8 text-2xl" }, [
+                      _vm._v(
+                        "\n                            Route\n                        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "mt-6 text-gray-500" }, [
+                          _vm._v(
+                            "\n                                Retrieve garbage bins with a fullness of "
+                          ),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.fullness,
+                                expression: "form.fullness"
+                              }
+                            ],
+                            staticClass: "form-input",
+                            attrs: {
+                              id: "fullness",
+                              type: "number",
+                              min: "0",
+                              max: "100"
+                            },
+                            domProps: { value: _vm.form.fullness },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "fullness",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v("%\n                            ")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "jet-button",
+                          {
+                            staticClass:
+                              "flex my-8 mx-auto items-center justify-center",
+                            attrs: { type: "submit" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Determine pick-up route\n                            "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
         ])
       ])
     ],
     1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "h2",
+                {
+                  staticClass:
+                    "font-semibold text-xl text-gray-800 leading-tight"
+                },
+                [_vm._v("\n            Route\n        ")]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
+    [
+      _vm._v(" "),
+      _c("container", [
+        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+          _c(
+            "div",
+            { staticClass: "bg-white overflow-auto shadow-xl sm:rounded-lg" },
+            [
+              _c(
+                "table",
+                { staticClass: "min-w-full divide-y divide-gray-200" },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Bins to retrieve\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Fullness\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Total distance\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Total estimated time\n                        "
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    { staticClass: "bg-white divide-y divide-gray-200" },
+                    [
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  _vm.routeData.properties.legs.length - 1
+                                ) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.fullness) +
+                                " %\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  (_vm.routeData.properties.time / 60).toFixed(
+                                    0
+                                  )
+                                ) +
+                                " minutes\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(
+                                  (
+                                    _vm.routeData.properties.distance / 1000
+                                  ).toFixed(2)
+                                ) +
+                                " kilometres\n                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.routeData.properties.legs, function(leg, index) {
+        return _c("container", { key: index }, [
+          _c("div", [
+            _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "bg-white overflow-auto shadow-xl sm:rounded-lg"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "p-6 sm:px-20 bg-white border-b border-gray-200 overflow-auto"
+                    },
+                    [
+                      _vm.routeData.properties.legs.length === index + 1
+                        ? _c("span", [_c("b", [_vm._v("To depot")])])
+                        : _c("span", [
+                            _c("b", [
+                              _vm._v("To garbage bin " + _vm._s(index + 1))
+                            ])
+                          ]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(
+                        "\n                        Estimated time to location: " +
+                          _vm._s((leg.time / 60).toFixed(0)) +
+                          " minutes\n                        "
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                        Distance to location: " +
+                          _vm._s((leg.distance / 1000).toFixed(2)) +
+                          " kilometres\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.loading === 0
+                    ? _c(
+                        "div",
+                        [
+                          _c(
+                            "l-map",
+                            {
+                              staticClass: "map",
+                              attrs: { zoom: _vm.zoom, center: _vm.center }
+                            },
+                            [
+                              _c("l-tile-layer", {
+                                attrs: {
+                                  url: _vm.url,
+                                  attribution: _vm.attribution
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("l-polyline", {
+                                attrs: { "lat-lngs": _vm.coordinates[index] }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "table",
+                    { staticClass: "min-w-full divide-y divide-gray-200" },
+                    [
+                      _c("thead", [
+                        _c("tr", [
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                #\n                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Direction\n                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            {
+                              staticClass:
+                                "px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Distance\n                            "
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        { staticClass: "bg-white divide-y divide-gray-200" },
+                        _vm._l(leg.steps, function(step, index) {
+                          return _c("tr", { key: index }, [
+                            _c(
+                              "th",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(index + 1) +
+                                    "\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(step.instruction.text) +
+                                    "\n                            "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "px-6 py-4 whitespace-no-wrap" },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s((step.distance / 1000).toFixed(2)) +
+                                    " kilometres\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -109915,6 +110599,8 @@ var map = {
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
 	"./Map": "./resources/js/Pages/Map.vue",
 	"./Map.vue": "./resources/js/Pages/Map.vue",
+	"./Map/Route": "./resources/js/Pages/Map/Route.vue",
+	"./Map/Route.vue": "./resources/js/Pages/Map/Route.vue",
 	"./Overview": "./resources/js/Pages/Overview.vue",
 	"./Overview.vue": "./resources/js/Pages/Overview.vue",
 	"./Overview/Add": "./resources/js/Pages/Overview/Add.vue",
@@ -110367,6 +111053,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_template_id_6ffb2f43_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_template_id_6ffb2f43_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Map/Route.vue":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Map/Route.vue ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Route.vue?vue&type=template&id=2a3c0d5d&scoped=true& */ "./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true&");
+/* harmony import */ var _Route_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Route.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& */ "./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Route_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "2a3c0d5d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Map/Route.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js&":
+/*!*******************************************************************!*\
+  !*** ./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Route.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=style&index=0&id=2a3c0d5d&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_style_index_0_id_2a3c0d5d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Route.vue?vue&type=template&id=2a3c0d5d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Map/Route.vue?vue&type=template&id=2a3c0d5d&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Route_vue_vue_type_template_id_2a3c0d5d_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
