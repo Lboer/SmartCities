@@ -23,7 +23,7 @@ class CreateValuesTable extends Migration
             $table->foreign('garbage_bin_id')
                 ->references('id')
                 ->on('garbage_bins')
-                ->onDelete('set NULL');
+                ->onDelete('cascade');
         });
     }
 
