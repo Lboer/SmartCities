@@ -3657,7 +3657,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // render name with "prediction: " at the start, so the user knows it is not actual data.
     renderName: function renderName(value) {
-      var oldDate = new Date(this.chartdata.labels[this.finalOriginalValue].replace("-", "/"));
+      var rearangedData = this.chartdata.labels[this.finalOriginalValue].split(" ");
+      var rearangedHours = rearangedData[0];
+      rearangedData = rearangedData[1].split("-");
+      rearangedData = rearangedData[2] + "-" + rearangedData[1] + "-" + rearangedData[0];
+      var oldDate = new Date(rearangedData + " " + rearangedHours);
       var date = new Date(oldDate.getTime() + value * 60000).toLocaleString();
       var switchDate = date.split(" ");
       var splitDate = switchDate[0].split("-");

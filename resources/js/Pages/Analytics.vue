@@ -150,7 +150,11 @@
             },
             // render name with "prediction: " at the start, so the user knows it is not actual data.
             renderName(value){
-                let oldDate = new Date(this.chartdata.labels[this.finalOriginalValue].replace("-", "/"));
+                let rearangedData = this.chartdata.labels[this.finalOriginalValue].split(" ");
+                let rearangedHours = rearangedData[0];
+                rearangedData = rearangedData[1].split("-");
+                rearangedData = rearangedData[2] + "-" + rearangedData[1] + "-" + rearangedData[0];
+                let oldDate = new Date(rearangedData + " " + rearangedHours);
                 let date = new Date(oldDate.getTime() + value*60000).toLocaleString();
                 let switchDate = date.split(" ");
                 let splitDate = switchDate[0].split("-");
