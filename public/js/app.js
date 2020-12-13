@@ -81410,11 +81410,11 @@ var render = function() {
                             _vm._v(
                               "\n                            " +
                                 _vm._s(
-                                  (_vm.routeData.properties.time / 60).toFixed(
-                                    0
-                                  )
+                                  (
+                                    _vm.routeData.properties.distance / 1000
+                                  ).toFixed(2)
                                 ) +
-                                " minutes\n                        "
+                                " kilometres\n                        "
                             )
                           ]
                         ),
@@ -81426,11 +81426,11 @@ var render = function() {
                             _vm._v(
                               "\n                            " +
                                 _vm._s(
-                                  (
-                                    _vm.routeData.properties.distance / 1000
-                                  ).toFixed(2)
+                                  (_vm.routeData.properties.time / 60).toFixed(
+                                    0
+                                  )
                                 ) +
-                                " kilometres\n                        "
+                                " minutes\n                        "
                             )
                           ]
                         )

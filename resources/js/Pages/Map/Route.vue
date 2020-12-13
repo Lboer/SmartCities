@@ -35,10 +35,10 @@
                                 {{ fullness }} %
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ (routeData.properties.time/60).toFixed(0) }} minutes
+                                {{ (routeData.properties.distance/1000).toFixed(2) }} kilometres
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
-                                {{ (routeData.properties.distance/1000).toFixed(2) }} kilometres
+                                {{ (routeData.properties.time/60).toFixed(0) }} minutes
                             </td>
                         </tr>
                         </tbody>
