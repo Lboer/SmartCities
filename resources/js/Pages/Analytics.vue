@@ -23,6 +23,7 @@
                     
                     <template>
                         <div class="container my-8">
+                            <p class="container my-8 text-center" v-if="loaded"> {{ showBinInformation() }} </p>
                             <line-chart
                             v-if="loaded"
                             :chartdata="chartdata"
@@ -52,14 +53,24 @@
             bins: Array
         },
         methods:{
-            async selectBin(event){
+            showBinInformation(){
+                var object = this.$props.bins.filter(obj => {
+                    return obj.id == this.selectedBinId;
+                })
+                return object[0].address + ", " + object[0].city;
+            },
+            resetGraph(){
                 this.predictAmmount = 0;
                 this.predictTotalAdded = 0;
                 this.predictMedianAdd = 0;
                 this.loaded = false;
                 this.predicted = false;
+            },
+            async selectBin(event){
+                this.resetGraph();
                 if(event.target.value != "select"){
                     try{
+                        this.selectedBinId = event.target.value;
                         // get json data as a promise
                         let promise = await fetch('api/data/' + event.target.value)
                         .then(response => response.json())
@@ -177,7 +188,8 @@
             finalOriginalValue: null,
             predictAmmount: 0,
             predictTotalAdded: 0,
-            predictMedianAdd: 0
+            predictMedianAdd: 0,
+            selectedBinId: null,
         }),
     }
 </script>

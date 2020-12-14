@@ -3509,6 +3509,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3517,8 +3518,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     bins: Array
   },
   methods: {
-    selectBin: function selectBin(event) {
+    showBinInformation: function showBinInformation() {
       var _this = this;
+
+      var object = this.$props.bins.filter(function (obj) {
+        return obj.id == _this.selectedBinId;
+      });
+      return object[0].address + ", " + object[0].city;
+    },
+    resetGraph: function resetGraph() {
+      this.predictAmmount = 0;
+      this.predictTotalAdded = 0;
+      this.predictMedianAdd = 0;
+      this.loaded = false;
+      this.predicted = false;
+    },
+    selectBin: function selectBin(event) {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var promise, i;
@@ -3526,31 +3542,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.predictAmmount = 0;
-                _this.predictTotalAdded = 0;
-                _this.predictMedianAdd = 0;
-                _this.loaded = false;
-                _this.predicted = false;
+                _this2.resetGraph();
 
                 if (!(event.target.value != "select")) {
-                  _context.next = 16;
+                  _context.next = 13;
                   break;
                 }
 
-                _context.prev = 6;
-                _context.next = 9;
+                _context.prev = 2;
+                _this2.selectedBinId = event.target.value; // get json data as a promise
+
+                _context.next = 6;
                 return fetch('api/data/' + event.target.value).then(function (response) {
                   return response.json();
                 });
 
-              case 9:
+              case 6:
                 promise = _context.sent;
 
                 // If there are 2 or more points of data, create a graph
                 if (promise.length > 1) {
-                  _this.warning = false; //set standard data
+                  _this2.warning = false; //set standard data
 
-                  _this.chartdata = {
+                  _this2.chartdata = {
                     labels: [],
                     datasets: [{
                       label: "Fullness",
@@ -3560,14 +3574,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }; // for each data point in the promise, render in graph
 
                   for (i = 0; i < promise.length; i++) {
-                    _this.chartdata.labels.push(_this.showDate(promise[i].updated_at));
+                    _this2.chartdata.labels.push(_this2.showDate(promise[i].updated_at));
 
-                    _this.chartdata.datasets[0].data.push(promise[i].percentage_full);
+                    _this2.chartdata.datasets[0].data.push(promise[i].percentage_full);
                   }
 
                   ; // add chart with min of 0, max of 100 and steps of 10
 
-                  _this.options = {
+                  _this2.options = {
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
@@ -3581,27 +3595,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }
                   };
 
-                  _this.showChart();
+                  _this2.showChart();
                 } // else tell user that a graph requires more data
                 else {
-                    _this.loaded = false;
-                    _this.warning = true;
+                    _this2.loaded = false;
+                    _this2.warning = true;
                   }
 
-                _context.next = 16;
+                _context.next = 13;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](6);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](2);
                 console.error(_context.t0);
 
-              case 16:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[6, 13]]);
+        }, _callee, null, [[2, 10]]);
       }))();
     },
 
@@ -3615,7 +3629,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     /** predict the next half hour */
     predictFullness: function predictFullness(event) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.loaded = false;
       this.finalOriginalValue = this.chartdata.labels.length - 1; // get the median increase
@@ -3640,7 +3654,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.predicted = true; // gebruik een anonymous callback om de graph opnieuw te renderen
 
       this.$nextTick(function () {
-        _this2.showChart();
+        _this3.showChart();
       });
     },
     safeIncrease: function safeIncrease(value) {
@@ -3685,7 +3699,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       finalOriginalValue: null,
       predictAmmount: 0,
       predictTotalAdded: 0,
-      predictMedianAdd: 0
+      predictMedianAdd: 0,
+      selectedBinId: null
     };
   }
 });
@@ -80891,6 +80906,12 @@ var render = function() {
                   "div",
                   { staticClass: "container my-8" },
                   [
+                    _vm.loaded
+                      ? _c("p", { staticClass: "container my-8 text-center" }, [
+                          _vm._v(" " + _vm._s(_vm.showBinInformation()) + " ")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
                     _vm.loaded
                       ? _c("line-chart", {
                           attrs: {
