@@ -57,7 +57,13 @@
                 var object = this.$props.bins.filter(obj => {
                     return obj.id == this.selectedBinId;
                 })
-                return object[0].address + ", " + object[0].city;
+                if(object[0].address != null && object[0].city != null){
+                    return object[0].address + ", " + object[0].city;
+                } else if(object[0].address != null){
+                    return object[0].address;
+                } else if(object[0].city != null){
+                    return object[0].city;
+                }
             },
             resetGraph(){
                 this.predictAmmount = 0;
