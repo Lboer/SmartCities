@@ -5,10 +5,9 @@ const DateMixin = {
         Vue.mixin({
             methods: {
                 showDate(date){
-                    let shortDate = new Date(date).toLocaleDateString('nl');
-                    let hourParts = date.split("T");
-                    let time = hourParts[1].substr(0,5);
-                    return shortDate + " " + time;
+                    let shortDate = new Date(date).toLocaleString('nl');
+
+                    return shortDate.split(' ')[0] + ' ' + shortDate.split(' ')[1].split(':').splice(0, 2).join(':');
                 }
             }
         })
