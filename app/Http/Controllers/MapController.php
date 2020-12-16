@@ -10,6 +10,7 @@ use App\Models\Map;
 use App\Models\GarbageBin;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class MapController extends Controller
 {
@@ -76,7 +77,16 @@ class MapController extends Controller
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post('https://api.geoapify.com/v1/routeplanner?apiKey=' . env('GEOAPIFY_KEY'), $body);
-        $waypoints = $response->json()['features'][0]['properties']['waypoints'];
+
+        $response = $response->json();
+
+        if (!$response || !isset($response['features'])) {
+            return redirect()->route('map')->withErrors([
+                'error' => 'Geen prullenbakken met deze criteria gevonden'
+            ]);
+        }
+
+        $waypoints = $response['features'][0]['properties']['waypoints'];
         $coordinates = [];
         foreach ($waypoints as $waypoint) {
             array_push($coordinates, $waypoint['original_location'][1] . ',' . $waypoint['original_location'][0]);

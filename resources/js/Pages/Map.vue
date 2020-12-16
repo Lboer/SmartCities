@@ -98,13 +98,15 @@
             setMarkers: function () {
                 let markersArray = [];
                 this.bins.forEach(function (bin) {
-                    markersArray.push(latLng(bin.lat, bin.lon));
+                    if (bin.lat && bin.lon) {
+                        markersArray.push(latLng(bin.lat, bin.lon));
+                    }
                 });
                 this.markers = markersArray;
                 this.loading = 0;
             },
             submit() {
-                this.$inertia.post('/map/route', this.form)
+                this.$inertia.post('/map/route', this.form);
             },
             /** From SQL Timestamps to short date with time in hh:mm */
             showDate(date){

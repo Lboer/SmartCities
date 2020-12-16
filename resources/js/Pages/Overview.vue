@@ -143,13 +143,7 @@
                 }).then(() => {
                     this.garbageBinBeingDeleted = null
                 });
-            },
-            showDate(date){
-                let shortDate = new Date(date).toLocaleDateString();
-                let hourParts = date.split("T");
-                let time = hourParts[1].substr(0,5);
-                return time + " " + shortDate;
-            },
+            }
         }
     }
 </script>

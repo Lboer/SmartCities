@@ -56,7 +56,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div class="text-sm leading-5 text-gray-900">
-                                            {{ records[0].created_at }} %
+                                            {{ showDate(records[0].created_at) }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
@@ -100,7 +100,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 <tr v-for="record in records" :key="record.id">
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        {{ record.created_at }}
+                                        {{ showDate(record.created_at) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div v-if="record.on_fire === 0" class="text-sm leading-5 text-green-500">
