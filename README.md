@@ -1,4 +1,4 @@
-## smart prullenbak
+## Smart Bins
 
 De code voor het dashboard van onze smart prullenbak. Bij het dashboard horen:
 - Een overzicht van alle prullenbakken
