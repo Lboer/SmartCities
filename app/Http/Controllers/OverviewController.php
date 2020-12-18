@@ -13,24 +13,6 @@ use Inertia\Inertia;
 
 class OverviewController extends Controller
 {
-    // initiate lon and lat
-    private $lon = null;
-    private $lat = null;
-
-    public function getLonLat($request)
-    {
-        // Call GeoApify API
-        $location = $request['address'] . ' ' . $request['city'];
-        $client = new GuzzleHTTP\Client();
-        $request = $client->get('https://api.geoapify.com/v1/geocode/search?text=' . $location . '&limit=1&apiKey='.env('GEOAPIFY_KEY'));
-
-        // Get Lon and Lat if request is success and has relevant data
-        if ($request->getStatusCode() == 200 && count(json_decode($request->getBody())->features) !== 0) {
-            $this->lon = json_decode($request->getBody())->features[0]->properties->lon;
-            $this->lat = json_decode($request->getBody())->features[0]->properties->lat;
-        }
-    }
-
     public function showAddForm()
     {
         return Inertia::render("Overview/Add");
