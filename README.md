@@ -19,9 +19,14 @@ php artisan client:secret
 
 De volgende Libraries zijn gebruikt:
 - Vue-chart.js
+<<<<<<< HEAD
 - Tailwindcss
 - Leaflet.js
 
 ## API service
 
 We hebben Geoapify's API service gebruikt om routes te renderen tussen prullenbakken.
+=======
+- Geoapify
+- Tailwindcss
+>>>>>>> 8fa50908ce357fc66c9942481dd315cd0b082fd0
